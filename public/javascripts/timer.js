@@ -12,7 +12,7 @@ $(function() {
     });
     $("body").keydown(function(e){
         var k = e ? e.which : window.event.keyCode;
-        if (k == 32 || k==43 || k==44) continue_step();
+        if (k == 32 || k==33 || k==34) continue_step();
     });
 });
 
