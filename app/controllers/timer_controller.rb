@@ -11,7 +11,6 @@ class TimerController < ApplicationController
       @game.save
 
       @game.number_of_players.times do |i|
-        print "doing sessions for " + @game_sessions[i].player.name
         turn_order = @game_sessions[i].turn_order
 
         @game_sessions[i].turn_time = @game.time_per_turn
@@ -58,7 +57,6 @@ class TimerController < ApplicationController
         
         redirect_to :action =>:end_game,:game_id => params[:game_id]
       else
-        print "insider else ==============================="
         redirect_to :action =>:index,:game_id => params[:game_id] 
       end
     end
