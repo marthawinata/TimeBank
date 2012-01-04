@@ -1,4 +1,3 @@
-
 Feature: Run Timer
   Timer should give players time per turn each,
   when the turn time is finished, it should eat into the time bank
@@ -14,6 +13,7 @@ Feature: Run Timer
     And I enter player details "Minan,Marty,Joe"
     And I start the game
 
+  @javascript
   Scenario: start the round and leave the time running out
     until the end of the round
     When I start the round
@@ -21,10 +21,10 @@ Feature: Run Timer
     Then 5 seconds later, I should see "Minan's turn now"
     Then 10 seconds later, I should see "00:00"
 
-    Then 15 seconds later, I should see "Marty's turn is starting" after 15 seconds
-    Then 5 seconds later, I should see "Marty's turn now" after 37 seconds
+    Then 15 seconds later, I should see "Marty's turn is starting"
+    Then 5 seconds later, I should see "Marty's turn now"
 
-    Then 25 seconds later, I should see "Joe's turn is starting" after 62 seconds
-    Then 5 seconds later, I should see "Joe's turn now" after 67 seconds
+    Then 25 seconds later, I should see "Joe's turn is starting"
+    Then 5 seconds later, I should see "Joe's turn now"
 
-    Then 25 seconds later, I should see "The next round is about to start" after 100 seconds
+    Then 25 seconds later, I should see "The next round is about to start"
