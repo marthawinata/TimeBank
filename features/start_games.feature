@@ -8,7 +8,7 @@ Feature: Start Games
     Then I should see <name>
     And <player_names> are playing
     And I should not see "Player1"
-    
+
     Scenarios: valid, simple inputs
       | name     | player_num | player_names            |
       | Steam    | 4          | Peggy,Marty,Minan,Joe      |
