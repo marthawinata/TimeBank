@@ -8,8 +8,9 @@ gem 'jquery-rails', '>= 1.0.12'
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
+
 group :development, :test do
-  gem 'rspec-rails', '2.0.1'
+  gem 'rspec-rails', '2.7.0'
   gem 'cucumber-rails', '>= 0.3.2'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
