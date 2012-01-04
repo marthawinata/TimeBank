@@ -17,14 +17,14 @@ Feature: Run Timer
   Scenario: start the round and leave the time running out
     until the end of the round
     When I start the round
-    Then I should see "Minan's turn is starting" after 2 second
-    Then I should see "Minan's turn now" after 7 seconds
-    Then I should see "00:00" after 17 seconds
+    Then 2 seconds later, I should see "Minan's turn is starting"
+    Then 5 seconds later, I should see "Minan's turn now"
+    Then 10 seconds later, I should see "00:00"
 
-    Then I should see "Marty's turn is starting" after 32 seconds
-    Then I should see "Marty's turn now" after 37 seconds
+    Then 15 seconds later, I should see "Marty's turn is starting" after 15 seconds
+    Then 5 seconds later, I should see "Marty's turn now" after 37 seconds
 
-    Then I should see "Joe's turn is starting" after 62 seconds
-    Then I should see "Joe's turn now" after 67 seconds
+    Then 25 seconds later, I should see "Joe's turn is starting" after 62 seconds
+    Then 5 seconds later, I should see "Joe's turn now" after 67 seconds
 
-    Then I should see "The next round is about to start" after 100 seconds
+    Then 25 seconds later, I should see "The next round is about to start" after 100 seconds
