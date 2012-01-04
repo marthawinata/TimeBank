@@ -28,3 +28,32 @@ Feature: Run Timer
     Then 5 seconds later, I should see "Joe's turn now" after 67 seconds
 
     Then 25 seconds later, I should see "The next round is about to start" after 100 seconds
+
+
+    Scenario: start the round and press next turn every 10 seconds
+    it should go through several rounds before ending the game
+    When I start the round
+    Then 2 seconds later, I should see "Min'an's turn is starting"
+    And I should see "Round #1"
+    When 10 seconds later, I click "press to continue"
+    Then 2 seconds later, I should see "Marty's turn is starting"
+    When 10 seconds later, I click "press to continue"
+    Then 2 seconds later, I should see "Joe's turn is starting"
+    When 10 seconds later, I click "press to continue"
+    Then 2 seconds later, I should see "The next round is about to start"
+
+    When I start the round
+    Then 2 seconds later, I should see "Min'an's turn is starting"
+    And I should see "Round #2"
+    When 10 seconds later, I click "press to continue"
+    Then 2 seconds later, I should see "Marty's turn is starting"
+    When 10 seconds later, I click "press to continue"
+    Then 2 seconds later, I should see "Joe's turn is starting"
+    When 10 seconds later, I click "press to continue"
+    Then 2 seconds later, I should see "The next round is about to start"
+
+    When I start the round
+    Then 2 seconds later, I should see "Min'an's turn is starting"
+    And I should see "Round #3"
+    When I click "End this game"
+    Then I should see "Game Summary"
