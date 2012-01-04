@@ -13,47 +13,44 @@ Feature: Run Timer
     And I enter player details "Minan,Marty,Joe"
     And I start the game
 
-  @javascript
+  @javascript @slow
   Scenario: start the round and leave the time running out
     until the end of the round
+
     When I start the round
     Then 2 seconds later, I should see "Minan's turn is starting"
     Then 5 seconds later, I should see "Minan's turn now"
     Then 10 seconds later, I should see "00:00"
-
     Then 15 seconds later, I should see "Marty's turn is starting"
     Then 5 seconds later, I should see "Marty's turn now"
-
     Then 25 seconds later, I should see "Joe's turn is starting"
     Then 5 seconds later, I should see "Joe's turn now"
-
     Then 25 seconds later, I should see "The next round is about to start"
 
-    Scenario: start the round and press next turn every 10 seconds
+  @javascript
+  Scenario: start the round and press next turn every 10 seconds
     it should go through several rounds before ending the game
+
     When I start the round
-    Then 2 seconds later, I should see "Min'an's turn is starting"
+    Then 2 seconds later, I should see "Minan's turn is starting"
     And I should see "Round #1"
-    When 10 seconds later, I click "press to continue"
+    When 10 seconds later, I continue to next player
     Then 2 seconds later, I should see "Marty's turn is starting"
-    When 10 seconds later, I click "press to continue"
+    When 10 seconds later, I continue to next player
     Then 2 seconds later, I should see "Joe's turn is starting"
-    When 10 seconds later, I click "press to continue"
+    When 10 seconds later, I continue to next player
     Then 2 seconds later, I should see "The next round is about to start"
-
     When I start the round
-    Then 2 seconds later, I should see "Min'an's turn is starting"
+    Then 2 seconds later, I should see "Minan's turn is starting"
     And I should see "Round #2"
-    When 10 seconds later, I click "press to continue"
+    When 10 seconds later, I continue to next player
     Then 2 seconds later, I should see "Marty's turn is starting"
-    When 10 seconds later, I click "press to continue"
+    When 10 seconds later, I continue to next player
     Then 2 seconds later, I should see "Joe's turn is starting"
-    When 10 seconds later, I click "press to continue"
+    When 10 seconds later, I continue to next player
     Then 2 seconds later, I should see "The next round is about to start"
-
     When I start the round
-    Then 2 seconds later, I should see "Min'an's turn is starting"
+    Then 2 seconds later, I should see "Minan's turn is starting"
     And I should see "Round #3"
-    When I click "End this game"
+    When I end the game
     Then I should see "Game Summary"
-

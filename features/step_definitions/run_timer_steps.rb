@@ -45,5 +45,18 @@ end
 
 Then /^(\d+) seconds later, I should see "([^"]*)"$/ do |wait_time, expected_text|
   sleep(wait_time.to_i)
+  page.find("#timer_area").should have_content(expected_text)
+end
+
+Then /^I should see "([^"]*)"$/ do |expected_text|
   page.should have_content(expected_text)
+end
+
+When /^(\d+) seconds later, I continue to next player$/ do |wait_time|
+  sleep(wait_time.to_i)
+  click_button "press to continue"
+end
+
+When /^I end the game$/ do
+  page.find("#end_game_button").click
 end
