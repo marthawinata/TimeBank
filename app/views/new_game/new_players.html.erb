@@ -4,7 +4,7 @@
 <%= form_tag({:action => :create_game_sessions},{:method => "post", 'data-ajax' => "false"}) do %>
   <% @game.number_of_players.times do |i| %>
     <div class="field">
-      <%= label_tag "Player \##{i+1} name " %><br />
+      <%= label_tag "players[#{i}][name]", "Player \##{i+1} name" %>
       <%= text_field_tag "players[#{i}][name]", "Player#{i+1}"%>
     </div>
   <% end %>
