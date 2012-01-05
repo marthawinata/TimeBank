@@ -1,5 +1,6 @@
 <div data-role="header">
   <h1 text-align="centre">Timebank</h1>
 </div><!-- /header -->
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<% flash.each do |name, msg| %>
+  <%= content_tag :div, msg, :id => "flash_#{name}", :class => "ui-body ui-body-e" %>
+<% end %>
