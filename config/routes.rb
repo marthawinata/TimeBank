@@ -1,5 +1,7 @@
 TimeBank::Application.routes.draw do
 
+  devise_for :users
+
   resources :games
 
   match ':controller(/:action(/:id))'
