@@ -27,7 +27,7 @@ Feature: Run Timer
     Then 5 seconds later, I should see "Joe's turn now"
     Then 25 seconds later, I should see "The next round is about to start"
 
-  @javascript
+  @javascript @slow
   Scenario: start the round and press next turn every 10 seconds
     it should go through several rounds before ending the game
 
