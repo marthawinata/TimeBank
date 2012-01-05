@@ -1,5 +1,10 @@
 <div data-role="header">
   <h1 text-align="centre">Timebank</h1>
+  <% if user_signed_in? %>
+    <%= link_to('Logout', destroy_user_session_path, :method => :delete, :class => ['ui-btn-right','logout-button']) %>
+  <% else %>
+    <%= link_to('Login', new_user_session_path,  :class => ['ui-btn-right', 'login-button'])  %>
+  <% end %>
 </div><!-- /header -->
 <% flash.each do |name, msg| %>
   <%= content_tag :div, msg, :id => "flash_#{name}", :class => "ui-body ui-body-e" %>

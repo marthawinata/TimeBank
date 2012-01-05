@@ -1,17 +1,19 @@
 TimeBank::Application.routes.draw do
 
   devise_for :users
-
+  
   resources :games
 
-  match ':controller(/:action(/:id))'
-  
   resources :game_sessions
-
   
   resources :players
+  
+  match 'timer' => 'timer#index', :via => [:get, :post]
 
-  resources :new_game, :timer
+  match ':controller(/:action(/:id))'
+  match 'new_game' => 'new_game#index', :as => :configure_game
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -62,7 +64,7 @@ TimeBank::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => "new_game#index"
+  root :to => "games#index"
 
   # See how all your routes lay out with "rake routes"
 

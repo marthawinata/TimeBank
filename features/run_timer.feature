@@ -4,7 +4,9 @@ Feature: Run Timer
   when that finishes, the current player's turn is skipped, and the next player starts
 
   Background: start with standard game for this feature
-    Given I started a game "Power Grid"
+    Given I am logged out
+    And I logged in as "tan.minan@gmail.com" and password "password"
+    And I started a game "Power Grid"
     And time_per_turn is "00:00:10"
     And timebank_per_player is "00:00:15"
     And interlude_per_turn is "00:00:05"
