@@ -1,0 +1,2 @@
+module ProposedVenuesHelper
+end

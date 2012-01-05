@@ -1,0 +1,25 @@
+<%= form_for(@available_boardgame) do |f| %>
+  <% if @available_boardgame.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@available_boardgame.errors.count, "error") %> prohibited this available_boardgame from being saved:</h2>
+
+      <ul>
+      <% @available_boardgame.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :collection_id %><br />
+    <%= f.text_field :collection_id %>
+  </div>
+  <div class="field">
+    <%= f.label :meetup_id %><br />
+    <%= f.text_field :meetup_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

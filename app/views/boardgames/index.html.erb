@@ -1,0 +1,29 @@
+<h1>Listing boardgames</h1>
+
+<table>
+  <tr>
+    <th>Bgg</th>
+    <th>Name</th>
+    <th>Parent boardgame</th>
+    <th>Is standalone</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @boardgames.each do |boardgame| %>
+  <tr>
+    <td><%= boardgame.bgg_id %></td>
+    <td><%= boardgame.name %></td>
+    <td><%= boardgame.parent_boardgame_id %></td>
+    <td><%= boardgame.is_standalone %></td>
+    <td><%= link_to 'Show', boardgame %></td>
+    <td><%= link_to 'Edit', edit_boardgame_path(boardgame) %></td>
+    <td><%= link_to 'Destroy', boardgame, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Boardgame', new_boardgame_path %>

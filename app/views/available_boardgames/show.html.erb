@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Collection:</b>
+  <%= @available_boardgame.collection_id %>
+</p>
+
+<p>
+  <b>Meetup:</b>
+  <%= @available_boardgame.meetup_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_available_boardgame_path(@available_boardgame) %> |
+<%= link_to 'Back', available_boardgames_path %>

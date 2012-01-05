@@ -1,0 +1,29 @@
+<%= form_for(@collection) do |f| %>
+  <% if @collection.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@collection.errors.count, "error") %> prohibited this collection from being saved:</h2>
+
+      <ul>
+      <% @collection.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :player_id %><br />
+    <%= f.text_field :player_id %>
+  </div>
+  <div class="field">
+    <%= f.label :boardgame_id %><br />
+    <%= f.text_field :boardgame_id %>
+  </div>
+  <div class="field">
+    <%= f.label :bought_at %><br />
+    <%= f.text_area :bought_at %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

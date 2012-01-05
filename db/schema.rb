@@ -10,7 +10,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111226110436) do
+ActiveRecord::Schema.define(:version => 20120105221724) do
+
+  create_table "available_boardgames", :force => true do |t|
+    t.integer  "collection_id"
+    t.integer  "meetup_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "boardgames", :force => true do |t|
+    t.integer  "bgg_id"
+    t.string   "name"
+    t.integer  "parent_boardgame_id"
+    t.boolean  "is_standalone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "collections", :force => true do |t|
+    t.integer  "player_id"
+    t.integer  "boardgame_id"
+    t.text     "bought_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "game_sessions", :force => true do |t|
     t.integer  "player_id"
@@ -40,6 +64,25 @@ ActiveRecord::Schema.define(:version => 20111226110436) do
     t.integer  "first_type",          :default => 0
   end
 
+  create_table "meetups", :force => true do |t|
+    t.integer  "host_player_id"
+    t.date     "confirmed_date"
+    t.time     "confirmed_time"
+    t.text     "confirmed_venue"
+    t.string   "meetup_type"
+    t.text     "venue_link"
+    t.string   "invitation_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "meetups_players", :force => true do |t|
+    t.integer  "meetup_id"
+    t.integer  "player_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "players", :force => true do |t|
     t.string   "name"
     t.string   "email"
@@ -47,5 +90,41 @@ ActiveRecord::Schema.define(:version => 20111226110436) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "proposed_timings", :force => true do |t|
+    t.integer  "meetup_id"
+    t.integer  "proposed_by_player"
+    t.date     "proposed_date"
+    t.time     "proposed_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "proposed_venues", :force => true do |t|
+    t.integer  "meetup_id"
+    t.integer  "proposed_by_player"
+    t.text     "description"
+    t.text     "venue_link"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "email",                                 :default => "", :null => false
+    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                         :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

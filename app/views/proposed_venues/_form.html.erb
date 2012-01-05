@@ -1,0 +1,33 @@
+<%= form_for(@proposed_venue) do |f| %>
+  <% if @proposed_venue.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@proposed_venue.errors.count, "error") %> prohibited this proposed_venue from being saved:</h2>
+
+      <ul>
+      <% @proposed_venue.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :meetup_id %><br />
+    <%= f.text_field :meetup_id %>
+  </div>
+  <div class="field">
+    <%= f.label :proposed_by_player %><br />
+    <%= f.text_field :proposed_by_player %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :venue_link %><br />
+    <%= f.text_area :venue_link %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

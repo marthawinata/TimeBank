@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Host player:</b>
+  <%= @meetup.host_player_id %>
+</p>
+
+<p>
+  <b>Confirmed date:</b>
+  <%= @meetup.confirmed_date %>
+</p>
+
+<p>
+  <b>Confirmed time:</b>
+  <%= @meetup.confirmed_time %>
+</p>
+
+<p>
+  <b>Confirmed venue:</b>
+  <%= @meetup.confirmed_venue %>
+</p>
+
+<p>
+  <b>Meetup type:</b>
+  <%= @meetup.meetup_type %>
+</p>
+
+<p>
+  <b>Venue link:</b>
+  <%= @meetup.venue_link %>
+</p>
+
+<p>
+  <b>Invitation type:</b>
+  <%= @meetup.invitation_type %>
+</p>
+
+
+<%= link_to 'Edit', edit_meetup_path(@meetup) %> |
+<%= link_to 'Back', meetups_path %>

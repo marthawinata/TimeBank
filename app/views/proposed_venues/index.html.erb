@@ -1,0 +1,29 @@
+<h1>Listing proposed_venues</h1>
+
+<table>
+  <tr>
+    <th>Meetup</th>
+    <th>Proposed by player</th>
+    <th>Description</th>
+    <th>Venue link</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @proposed_venues.each do |proposed_venue| %>
+  <tr>
+    <td><%= proposed_venue.meetup_id %></td>
+    <td><%= proposed_venue.proposed_by_player %></td>
+    <td><%= proposed_venue.description %></td>
+    <td><%= proposed_venue.venue_link %></td>
+    <td><%= link_to 'Show', proposed_venue %></td>
+    <td><%= link_to 'Edit', edit_proposed_venue_path(proposed_venue) %></td>
+    <td><%= link_to 'Destroy', proposed_venue, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Proposed venue', new_proposed_venue_path %>

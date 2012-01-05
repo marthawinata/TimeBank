@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Meetup:</b>
+  <%= @proposed_venue.meetup_id %>
+</p>
+
+<p>
+  <b>Proposed by player:</b>
+  <%= @proposed_venue.proposed_by_player %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @proposed_venue.description %>
+</p>
+
+<p>
+  <b>Venue link:</b>
+  <%= @proposed_venue.venue_link %>
+</p>
+
+
+<%= link_to 'Edit', edit_proposed_venue_path(@proposed_venue) %> |
+<%= link_to 'Back', proposed_venues_path %>

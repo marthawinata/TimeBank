@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Bgg:</b>
+  <%= @boardgame.bgg_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @boardgame.name %>
+</p>
+
+<p>
+  <b>Parent boardgame:</b>
+  <%= @boardgame.parent_boardgame_id %>
+</p>
+
+<p>
+  <b>Is standalone:</b>
+  <%= @boardgame.is_standalone %>
+</p>
+
+
+<%= link_to 'Edit', edit_boardgame_path(@boardgame) %> |
+<%= link_to 'Back', boardgames_path %>

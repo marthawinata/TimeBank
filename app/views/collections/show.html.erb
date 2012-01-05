@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Player:</b>
+  <%= @collection.player_id %>
+</p>
+
+<p>
+  <b>Boardgame:</b>
+  <%= @collection.boardgame_id %>
+</p>
+
+<p>
+  <b>Bought at:</b>
+  <%= @collection.bought_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_collection_path(@collection) %> |
+<%= link_to 'Back', collections_path %>

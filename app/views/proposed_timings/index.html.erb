@@ -1,0 +1,29 @@
+<h1>Listing proposed_timings</h1>
+
+<table>
+  <tr>
+    <th>Meetup</th>
+    <th>Proposed by player</th>
+    <th>Proposed date</th>
+    <th>Proposed time</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @proposed_timings.each do |proposed_timing| %>
+  <tr>
+    <td><%= proposed_timing.meetup_id %></td>
+    <td><%= proposed_timing.proposed_by_player %></td>
+    <td><%= proposed_timing.proposed_date %></td>
+    <td><%= proposed_timing.proposed_time %></td>
+    <td><%= link_to 'Show', proposed_timing %></td>
+    <td><%= link_to 'Edit', edit_proposed_timing_path(proposed_timing) %></td>
+    <td><%= link_to 'Destroy', proposed_timing, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Proposed timing', new_proposed_timing_path %>

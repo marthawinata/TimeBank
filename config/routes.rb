@@ -1,5 +1,17 @@
 TimeBank::Application.routes.draw do
 
+  resources :proposed_venues
+
+  resources :proposed_timings
+
+  resources :meetups
+
+  resources :available_boardgames
+
+  resources :collections
+
+  resources :boardgames
+
   resources :games
 
   match ':controller(/:action(/:id))'
