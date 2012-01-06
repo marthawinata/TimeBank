@@ -1,5 +1,23 @@
+Given /^I am logged out$/ do
+  visit '/'
+  if page.has_link? "Logout"
+    click_link "Logout"
+  end
+end
+
+Given /^I logged in as "([^"]*)" and password "([^"]*)"$/ do  |email, password|
+
+  User.new(:email => email, :password => password, :password_confirmation => password).save!
+
+  click_link "Login"
+  fill_in "user[email]", :with => email
+  fill_in "user[password]", :with => password
+  click_button "Sign in"
+end
+
 Given /^I started a game "([^"]*)"$/ do |game_name|
-  visit "/"
+  visit '/'
+  click_link "New Game"
   fill_in "Name", :with => game_name
 end
 

@@ -12,6 +12,7 @@ end
 
 Given /^a game of (\w*) with (\d+) players$/ do |game_name, num_players|
   visit "/"
+  click_link "New Game"
   fill_in "Name", :with => game_name
   fill_in "Number of players", :with => num_players
   click_button "Create new game"

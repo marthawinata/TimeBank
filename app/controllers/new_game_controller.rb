@@ -1,4 +1,5 @@
 class NewGameController < ApplicationController
+  before_filter :authenticate_user!
 
   def index
     @game = Game.new
