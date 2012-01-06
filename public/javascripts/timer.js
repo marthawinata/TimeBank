@@ -19,28 +19,25 @@ $(function() {
 function updateStats() {
     timeTicks("game_time",1,true);
 
-    turnNumber = document.getElementById("turn_number").value;
-    document.getElementById("message").innerHTML =
-    document.getElementById("player_name_"+turnNumber).value + "'s turn now"
-    if (document.getElementById("player_turn_time_" + turnNumber).value === "00:10") {
-        document.getElementById("message_time").style.color = "red";
+    turnNumber = $("#turn_number").val();
+    $("#message").html($("#player_name_"+turnNumber).val() + "'s turn now");
+    if ($("#player_turn_time_" + turnNumber).val() === "00:10") {
+        $("#message_time").css('color', "red");
     }
 
-    if (document.getElementById("player_turn_time_" + turnNumber).value === "00:00"
-        && document.getElementById("player_time_bank_" + turnNumber).value === "00:00") {
-        document.getElementById("message").innerHTML = "skipping player "
-        + document.getElementById("player_name_"+turnNumber).value
-        + ", no more time left for this turn";
+    if ($("#player_turn_time_" + turnNumber).val() === "00:00"
+        && $("player_time_bank_" + turnNumber).val() === "00:00") {
+        $("#message").html("skipping player "  + $("#player_name_"+turnNumber).val()
+            + ", no more time left for this turn");
         nextPlayer();
     } else {
-        if (document.getElementById("player_turn_time_" + turnNumber).value === "00:00") {
+        if ($("#player_turn_time_" + turnNumber).val() === "00:00") {
             timeTicks("player_time_bank_" + turnNumber,-1,false);
         } else {
             timeTicks("player_turn_time_" + turnNumber,-1,false);
         }
-        document.getElementById("message_time").innerHTML =
-        document.getElementById("player_turn_time_" + turnNumber).value +
-        " &nbsp&nbsp&nbsp&nbsp&nbsp with timebank: "+ document.getElementById("player_time_bank_" + turnNumber).value;
+        $("#message_time").html($("#player_turn_time_" + turnNumber).val() +
+        " &nbsp&nbsp&nbsp&nbsp&nbsp with timebank: "+ $("#player_time_bank_" + turnNumber).val());
     
     }
 
@@ -51,7 +48,7 @@ function updateStats() {
 }
 
 function timeTicks(timeId,addSecond,withHour) {
-    timeText = document.getElementById(timeId).value;
+    timeText = $('#' + timeId).val();
     //    console.log ("withHour: " + withHour);
     if (withHour === true) {
         hour = parseInt(timeText.substr(0,2), 10);
@@ -106,12 +103,12 @@ function timeTicks(timeId,addSecond,withHour) {
     //    console.log("seconds: " + second);
 
     if (withHour === true) {
-        document.getElementById(timeId).value = hourPadding + hour + ":"
+        $('#' + timeId).val(hourPadding + hour + ":"
         + minutePadding + minute + ":"
-        + secondPadding + second;
+        + secondPadding + second);
     } else {
-        document.getElementById(timeId).value = minutePadding + minute + ":"
-        + secondPadding + second;
+        $('#' + timeId).val(minutePadding + minute + ":"
+        + secondPadding + second);
     }
 
 //    console.log("Result is " + document.getElementById("game_time_text").value);
@@ -120,18 +117,18 @@ function timeTicks(timeId,addSecond,withHour) {
 var intervalId = 0;
 
 function startRound() {
-    roundNumber = parseInt(document.getElementById("round_number").value,10);
+    roundNumber = parseInt($("#round_number").val(),10);
     roundNumber += 1;
-    document.getElementById("round_number").value = roundNumber;
-    document.getElementById("round_number_display").innerHTML = roundNumber;
-    document.getElementById("turn_number").value = 1;
+    $("#round_number").val(roundNumber);
+    $("#round_number_display").html(roundNumber);
+    $("#turn_number").val(1);
     doInterludeThenUpdateStats();
 }
 
 function continue_step() {
-    document.getElementById("message_time").style.color = "black";
+    $("#message_time").css('color', "black");
     $(".set-as-first").parents(".ui-btn").hide();
-    turnNumber = parseInt(document.getElementById("turn_number").value,10);
+    turnNumber = parseInt($("#turn_number").val(),10);
     if (turnNumber === 0) {
         startRound();
     } else {
@@ -140,11 +137,11 @@ function continue_step() {
 }
 
 function doInterludeThenUpdateStats() {
-    interludeTime = parseInt(document.getElementById("interlude_per_turn").value.substr(0,2),10);
+    interludeTime = parseInt($("#interlude_per_turn").val().substr(0,2),10);
     
-    turnNumber = document.getElementById("turn_number").value;
-    document.getElementById("message").innerHTML = document.getElementById("player_name_"+turnNumber).value + "'s turn is starting in " + document.getElementById("interlude_per_turn").value;
-    document.getElementById("message_time").innerHTML = "&nbsp"
+    turnNumber = $("#turn_number").val();
+    $("#message").html($("#player_name_"+turnNumber).val() + "'s turn is starting in " + $("#interlude_per_turn").val());
+    $("#message_time").html("&nbsp");
     clearInterval(intervalId);
     intervalId = setTimeout("updateStatsInInterval()",interludeTime * 1000);
 }
@@ -155,7 +152,6 @@ function updateStatsInInterval() {
 }
 function pauseGame() {
     clearInterval(intervalId);
-
 }
 
 function resumeGame() {
@@ -165,24 +161,24 @@ function resumeGame() {
 }
 
 function endGame() {
-    document.getElementById("turn_number").value = "-1"
+    $("#turn_number").val("-1");
     $("#form_timer").submit();
 }
 
 function nextPlayer() {
 
-    turnNumber = parseInt(document.getElementById("turn_number").value,10);
+    turnNumber = parseInt($("#turn_number").val(),10);
     turnNumber += 1;
 
-    numberOfPlayers = parseInt(document.getElementById("number_of_players").value,10);
+    numberOfPlayers = parseInt($("#number_of_players").val(),10);
 
     if (turnNumber > numberOfPlayers) {
-        document.getElementById("turn_number").value = 0;
-        document.getElementById("message").innerHTML = "End of round, please wait..."
+        $("#turn_number").val(0);
+        $("#message").html("End of round, please wait...");
 
         $("#form_timer").submit();
     } else {
-        document.getElementById("turn_number").value = turnNumber;
+        $("#turn_number").val(turnNumber);
         //        document.getElementById("message").innerHTML = ""
         doInterludeThenUpdateStats();
     }

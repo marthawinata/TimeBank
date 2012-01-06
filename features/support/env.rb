@@ -55,3 +55,4 @@ end
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
 Devise.stretches = 1
+Capybara.server_boot_timeout = 50
