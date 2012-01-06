@@ -8,12 +8,12 @@ class TimerController < ApplicationController
     if params["game_time"] then
       update_game_status 
       update_time_used
+
       if params["turn_number"] == "-1" #end game triggered
         @game.ended_at = Time.now
         @game.save
         redirect_to :action =>:end_game,:game_id => params[:game_id]
-        return
-        
+        return        
       elsif params["new_first_turn_order"]
         update_turn_order
       end
