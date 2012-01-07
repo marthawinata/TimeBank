@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.0.3'
 gem 'jquery-rails', '>= 1.0.12'
 gem 'devise', '1.5.3'
+gem 'make_voteable'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
