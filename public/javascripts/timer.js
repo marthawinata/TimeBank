@@ -24,9 +24,8 @@ function updateStats() {
     if ($("#player_turn_time_" + turnNumber).val() === "00:10") {
         $("#message_time").css('color', "red");
     }
-
     if ($("#player_turn_time_" + turnNumber).val() === "00:00"
-        && $("player_time_bank_" + turnNumber).val() === "00:00") {
+        && $("#player_time_bank_" + turnNumber).val() === "00:00") {
         $("#message").html("skipping player "  + $("#player_name_"+turnNumber).val()
             + ", no more time left for this turn");
         nextPlayer();
