@@ -13,11 +13,11 @@
 
   <div class="field">
     <%= f.label :player_id %><br />
-    <%= f.text_field :player_id %>
+    <%= f.select :player_id, options_from_collection_for_select(@players, "id", "name") %>
   </div>
   <div class="field">
     <%= f.label :boardgame_id %><br />
-    <%= f.text_field :boardgame_id %>
+    <%= f.select :boardgame_id, options_from_collection_for_select(@boardgames, "id", "name") %>
   </div>
   <div class="field">
     <%= f.label :bought_at %><br />

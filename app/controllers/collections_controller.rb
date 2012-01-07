@@ -25,6 +25,8 @@ class CollectionsController < ApplicationController
   # GET /collections/new.xml
   def new
     @collection = Collection.new
+    @players = Player.all
+    @boardgames = Boardgame.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,6 +37,9 @@ class CollectionsController < ApplicationController
   # GET /collections/1/edit
   def edit
     @collection = Collection.find(params[:id])
+    @players = Player.all
+    @boardgames = Boardgame.all
+
   end
 
   # POST /collections

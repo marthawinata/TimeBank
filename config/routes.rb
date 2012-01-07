@@ -1,5 +1,9 @@
 TimeBank::Application.routes.draw do
 
+  get "bgg_scraper/index"
+
+  get "bgg_scraper/scrape_game"
+
   devise_for :users
 
   resources :proposed_venues
