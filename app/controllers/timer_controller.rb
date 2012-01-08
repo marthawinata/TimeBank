@@ -4,20 +4,26 @@ class TimerController < ApplicationController
     @game = Game.find(params[:game_id])
     @game_sessions = GameSession.where(:game_id => params[:game_id]).order :turn_order
     @first_type_descriptions = Game::DESCRIPTIONS.invert
+  end
+
+  def create
+    @game = Game.find(params[:game_id])
+    @game_sessions = GameSession.where(:game_id => params[:game_id]).order :turn_order
+    @first_type_descriptions = Game::DESCRIPTIONS.invert
 
     if params["game_time"] then
-      update_game_status 
+      update_game_status
       update_time_used
+    end
 
-      if params["turn_number"] == "-1" #end game triggered
-        @game.ended_at = Time.now
-        @game.save
-        redirect_to :action =>:end_game,:game_id => params[:game_id]
-        return        
-      elsif params["new_first_turn_order"]
+    if params["turn_number"] == "-1" #end game triggered
+      @game.ended_at = Time.now
+      @game.save
+      redirect_to :action =>:end_game,:game_id => params[:game_id]
+    else
+      if params["new_first_turn_order"]
         update_turn_order
       end
-
       redirect_to :action =>:index,:game_id => params[:game_id]
     end
   end

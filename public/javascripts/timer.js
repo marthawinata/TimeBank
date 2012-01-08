@@ -19,7 +19,11 @@ $(function() {
 function updateStats() {
     timeTicks("game_time",1,true);
 
-    turnNumber = $("#turn_number").val();
+    var turnNumber = $("#turn_number").val();
+    if (turnNumber == 0){
+        return;
+    }
+    
     $("#message").html($("#player_name_"+turnNumber).val() + "'s turn now");
     if ($("#player_turn_time_" + turnNumber).val() === "00:10") {
         $("#message_time").css('color', "red");
@@ -47,7 +51,8 @@ function updateStats() {
 }
 
 function timeTicks(timeId,addSecond,withHour) {
-    timeText = $('#' + timeId).val();
+    var timeText = $('#' + timeId).val(),
+        hour, minute, second;
     //    console.log ("withHour: " + withHour);
     if (withHour === true) {
         hour = parseInt(timeText.substr(0,2), 10);
@@ -116,7 +121,7 @@ function timeTicks(timeId,addSecond,withHour) {
 var intervalId = 0;
 
 function startRound() {
-    roundNumber = parseInt($("#round_number").val(),10);
+    var roundNumber = parseInt($("#round_number").val(),10);
     roundNumber += 1;
     $("#round_number").val(roundNumber);
     $("#round_number_display").html(roundNumber);
@@ -127,7 +132,7 @@ function startRound() {
 function continue_step() {
     $("#message_time").css('color', "black");
     $(".set-as-first").parents(".ui-btn").hide();
-    turnNumber = parseInt($("#turn_number").val(),10);
+    var turnNumber = parseInt($("#turn_number").val(),10);
     if (turnNumber === 0) {
         startRound();
     } else {
@@ -136,9 +141,9 @@ function continue_step() {
 }
 
 function doInterludeThenUpdateStats() {
-    interludeTime = parseInt($("#interlude_per_turn").val().substr(0,2),10);
+    var interludeTime = parseInt($("#interlude_per_turn").val().substr(0,2),10);
     
-    turnNumber = $("#turn_number").val();
+    var turnNumber = $("#turn_number").val();
     $("#message").html($("#player_name_"+turnNumber).val() + "'s turn is starting in " + $("#interlude_per_turn").val());
     $("#message_time").html("&nbsp");
     clearInterval(intervalId);
@@ -166,10 +171,10 @@ function endGame() {
 
 function nextPlayer() {
 
-    turnNumber = parseInt($("#turn_number").val(),10);
+    var turnNumber = parseInt($("#turn_number").val(),10);
     turnNumber += 1;
 
-    numberOfPlayers = parseInt($("#number_of_players").val(),10);
+    var numberOfPlayers = parseInt($("#number_of_players").val(),10);
 
     if (turnNumber > numberOfPlayers) {
         $("#turn_number").val(0);

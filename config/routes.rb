@@ -20,8 +20,6 @@ TimeBank::Application.routes.draw do
   
   resources :players
   
-  match 'timer' => 'timer#index', :via => [:get, :post]
-
   match ':controller(/:action(/:id))'
   match 'new_game' => 'new_game#index', :as => :configure_game
 

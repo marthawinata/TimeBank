@@ -4,7 +4,7 @@
 <% end %>
 
 <%#= image_tag("logo.png", :alt => "Timebank Piggy", :class => "round") %>
-<%= form_tag({:action => :index},:method => "post",:id =>'form_timer', 'data-ajax' => 'false') do %>
+<%= form_tag({:action => "create"}, :id =>'form_timer', "data-ajax" => "false") do %>
 
 
   <div id="player_area_top">
