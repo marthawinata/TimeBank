@@ -12,16 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :player_id %><br />
-    <%= f.select :player_id, options_from_collection_for_select(@players, "id", "name") %>
+    <%= @user.email %><br />
   </div>
+
   <div class="field">
     <%= f.label :boardgame_id %><br />
     <%= f.select :boardgame_id, options_from_collection_for_select(@boardgames, "id", "name") %>
-  </div>
-  <div class="field">
-    <%= f.label :bought_at %><br />
-    <%= f.text_area :bought_at %>
   </div>
   <div class="actions">
     <%= f.submit %>

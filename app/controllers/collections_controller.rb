@@ -1,4 +1,6 @@
 class CollectionsController < ApplicationController
+  before_filter :authenticate_user!
+  
   # GET /collections
   # GET /collections.xml
   def index
@@ -25,7 +27,7 @@ class CollectionsController < ApplicationController
   # GET /collections/new.xml
   def new
     @collection = Collection.new
-    @players = Player.all
+    @user = current_user
     @boardgames = Boardgame.all
 
     respond_to do |format|
@@ -37,7 +39,7 @@ class CollectionsController < ApplicationController
   # GET /collections/1/edit
   def edit
     @collection = Collection.find(params[:id])
-    @players = Player.all
+    @user = current_user
     @boardgames = Boardgame.all
 
   end
@@ -46,7 +48,7 @@ class CollectionsController < ApplicationController
   # POST /collections.xml
   def create
     @collection = Collection.new(params[:collection])
-
+    @collection.user = current_user
     respond_to do |format|
       if @collection.save
         format.html { redirect_to(@collection, :notice => 'Collection was successfully created.') }

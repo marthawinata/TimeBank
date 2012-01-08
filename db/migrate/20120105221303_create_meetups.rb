@@ -1,7 +1,7 @@
 class CreateMeetups < ActiveRecord::Migration
   def self.up
     create_table :meetups do |t|
-      t.integer :host_player_id
+      t.integer :host_user_id
       t.date :confirmed_date
       t.time :confirmed_time
       t.text :confirmed_venue
