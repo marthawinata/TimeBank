@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>Name</th>
     <th>Host user</th>
     <th>Confirmed date</th>
     <th>Confirmed time</th>
@@ -16,6 +17,7 @@
 
 <% @meetups.each do |meetup| %>
   <tr>
+    <td><%= meetup.name %></td>
     <td><%= meetup.host_user.email unless meetup.host_user.nil? %></td>
     <td><%= meetup.confirmed_date %></td>
     <td><%= meetup.confirmed_time %></td>

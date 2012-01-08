@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <b>Name</b>
+  <%= @meetup.name %>
+</p>
+
+<p>
   <b>Host User</b>
   <%= @meetup.host_user.email unless @meetup.host_user.nil? %>
 </p>
