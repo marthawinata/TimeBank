@@ -14,6 +14,7 @@ class MeetupsController < ApplicationController
   # GET /meetups/1.xml
   def show
     @meetup = Meetup.find(params[:id])
+    @host_user = current_user
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +26,7 @@ class MeetupsController < ApplicationController
   # GET /meetups/new.xml
   def new
     @meetup = Meetup.new
+    @host_user = current_user
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,13 +37,14 @@ class MeetupsController < ApplicationController
   # GET /meetups/1/edit
   def edit
     @meetup = Meetup.find(params[:id])
+    @host_user = current_user
   end
 
   # POST /meetups
   # POST /meetups.xml
   def create
     @meetup = Meetup.new(params[:meetup])
-
+    @meetup.host_user = current_user
     respond_to do |format|
       if @meetup.save
         format.html { redirect_to(@meetup, :notice => 'Meetup was successfully created.') }

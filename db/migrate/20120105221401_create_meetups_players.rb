@@ -1,6 +1,6 @@
 class CreateMeetupsPlayers < ActiveRecord::Migration
   def self.up
-    create_table :meetups_players do |t|
+    create_table :meetups_players, :id => false do |t|
       t.integer :meetup_id
       t.integer :player_id
 

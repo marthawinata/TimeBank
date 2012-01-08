@@ -11,10 +11,11 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :host_player_id %><br />
-    <%= f.text_field :host_player_id %>
+<div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
   </div>
+
   <div class="field">
     <%= f.label :confirmed_date %><br />
     <%= f.date_select :confirmed_date %>
@@ -33,11 +34,12 @@
   </div>
   <div class="field">
     <%= f.label :venue_link %><br />
-    <%= f.text_area :venue_link %>
+    <%= f.text_area :venue_link%>
   </div>
   <div class="field">
     <%= f.label :invitation_type %><br />
     <%= f.text_field :invitation_type %>
+
   </div>
   <div class="actions">
     <%= f.submit %>

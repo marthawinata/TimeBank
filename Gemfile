@@ -3,7 +3,12 @@ source 'http://rubygems.org'
 gem 'rails', '3.0.3'
 gem 'jquery-rails', '>= 1.0.12'
 gem 'devise', '1.5.3'
+
 gem 'make_voteable'
+
+gem 'nokogiri'
+gem 'mechanize'
+
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -30,7 +35,7 @@ end
 
 # Bundle the extra gems:
 # gem 'bj'
-# gem 'nokogiri'
+#
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
 

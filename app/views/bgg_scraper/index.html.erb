@@ -1,0 +1,43 @@
+<h1>BggScraper#index</h1>
+
+<%= form_tag({:action => :scrape_game},{:method => "post", 'data-ajax' => "false"}) do %>
+
+  <div class="field">
+    <%= label_tag "BGG boardgame ID to scrape from" %><br />
+    <%= text_field_tag "scrape_from", '31259'%>
+  </div>
+
+  <div class="field">
+    <%= label_tag "BGG boardgame ID to scrape until" %><br />
+    <%= text_field_tag "scrape_until", '31265' %>
+  </div>
+
+
+  <div class="actions">
+    <%= submit_tag "Scrape games!" %>
+  </div>
+<% end %>
+
+<h1>Listing scraped boardgames</h1>
+
+<table>
+  <tr>
+    <th>Boardgame ID</th>
+    <th>BGG ID</th>
+    <th>Name</th>
+    <th>is_standalone</th>
+    <th>Parent Boardgame ID</th>
+  </tr>
+
+<% @boardgames.each do |boardgame| %>
+  <tr>
+    <td><%= boardgame.id %></td>
+    <td><%= boardgame.bgg_id %></td>
+    <td><a href=<%= "http://boardgamegeek.com/boardgame/"+ boardgame.bgg_id.to_s %>><%= boardgame.name %></a></td>
+    <td><%= boardgame.is_standalone %></td>
+    <td><%= boardgame.parent.name unless boardgame.parent.nil? %></td>
+    
+  </tr>
+<% end %>
+</table>
+
