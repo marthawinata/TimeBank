@@ -20,7 +20,7 @@ function updateStats() {
     timeTicks("game_time",1,true);
 
     var turnNumber = $("#turn_number").val();
-    if (turnNumber == 0){
+    if (turnNumber === "0" || turnNumber === "-1"){
         return;
     }
     
