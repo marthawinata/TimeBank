@@ -3,7 +3,7 @@ class NewGameController < ApplicationController
 
   def index
     @game = Game.new
-    @first_type_descriptions = Game::DESCRIPTIONS.invert
+    @first_type_descriptions = Game::FIRST_TYPE_DESCRIPTION.invert
   end
   
   def create_game

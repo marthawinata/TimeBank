@@ -4,7 +4,7 @@ describe "proposed_timings/show.html.erb" do
   before(:each) do
     @proposed_timing = assign(:proposed_timing, stub_model(ProposedTiming,
       :meetup_id => 1,
-      :proposed_by_player => 1
+      :proposed_by_user => 1
     ))
   end
 

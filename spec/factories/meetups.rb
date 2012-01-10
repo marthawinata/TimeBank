@@ -6,8 +6,8 @@ FactoryGirl.define do
     confirmed_date "2012-01-06"
     confirmed_time "2012-01-06 09:13:03"
     confirmed_venue "MyText"
-    meetup_type "MyString"
+    meetup_type_id "MyString"
     venue_link "MyText"
-    invitation_type "MyString"
+    invitation_type_id "MyString"
   end
 end

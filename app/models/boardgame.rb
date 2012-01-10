@@ -1,7 +1,7 @@
 class Boardgame < ActiveRecord::Base
   has_many :collections
   belongs_to :parent, :class_name => "Boardgame",:foreign_key => "parent_boardgame_id"
-  has_many :meetups, :through => :boardgames_meetups
+  has_many :meetups, :through => :available_boardgames
 
   def self.exists?(bgg_id)
     !Boardgame.where("bgg_id = ?",bgg_id).first.nil?

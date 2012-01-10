@@ -4,9 +4,6 @@ class BoardgamesController < ApplicationController
   def index
     @boardgames = Boardgame.all
 
-    require 'open-uri'
-    doc = Nokogiri::HTML(open("http://http://boardgamegeek.com/boardgame/31260/"))
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @boardgames }

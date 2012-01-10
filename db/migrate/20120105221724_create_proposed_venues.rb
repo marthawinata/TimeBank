@@ -2,7 +2,7 @@ class CreateProposedVenues < ActiveRecord::Migration
   def self.up
     create_table :proposed_venues do |t|
       t.integer :meetup_id
-      t.integer :proposed_by_player
+      t.integer :proposed_by_user
       t.text :description
       t.text :venue_link
 

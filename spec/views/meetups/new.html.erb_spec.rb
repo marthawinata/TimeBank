@@ -5,9 +5,9 @@ describe "meetups/new.html.erb" do
     assign(:meetup, stub_model(Meetup,
       :host_player_id => 1,
       :confirmed_venue => "MyText",
-      :meetup_type => "MyString",
+      :meetup_type_id => "MyString",
       :venue_link => "MyText",
-      :invitation_type => "MyString"
+      :invitation_type_id => "MyString"
     ).as_new_record)
   end
 

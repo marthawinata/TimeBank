@@ -5,13 +5,13 @@ describe "proposed_venues/index.html.erb" do
     assign(:proposed_venues, [
       stub_model(ProposedVenue,
         :meetup_id => 1,
-        :proposed_by_player => 1,
+        :proposed_by_user => 1,
         :description => "MyText",
         :venue_link => "MyText"
       ),
       stub_model(ProposedVenue,
         :meetup_id => 1,
-        :proposed_by_player => 1,
+        :proposed_by_user => 1,
         :description => "MyText",
         :venue_link => "MyText"
       )

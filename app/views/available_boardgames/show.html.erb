@@ -1,13 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Collection:</b>
-  <%= @available_boardgame.collection_id %>
-</p>
-
-<p>
   <b>Meetup:</b>
-  <%= @available_boardgame.meetup_id %>
+  <%= @available_boardgame.meetup.name unless @available_boardgame.meetup.nil? %>
+</p>
+<p>
+  <b>Boardgame:</b>
+  <%= @available_boardgame.boardgame.name %>
 </p>
 
 

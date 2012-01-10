@@ -14,7 +14,7 @@
 <% @proposed_timings.each do |proposed_timing| %>
   <tr>
     <td><%= proposed_timing.meetup_id %></td>
-    <td><%= proposed_timing.proposed_by_player %></td>
+    <td><%= proposed_timing.proposed_by_user %></td>
     <td><%= proposed_timing.proposed_date %></td>
     <td><%= proposed_timing.proposed_time %></td>
     <td><%= link_to 'Show', proposed_timing %></td>
@@ -26,4 +26,4 @@
 
 <br />
 
-<%= link_to 'New Proposed timing', new_proposed_timing_path %>
+<%= link_to 'New Proposed timing', new_proposed_timing_path(:meetup_id => @meetup.id) %>

@@ -5,6 +5,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.recoverable
       t.rememberable
       t.trackable
+      t.integer :player_id
 
       # t.encryptable
       # t.confirmable

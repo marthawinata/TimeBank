@@ -4,41 +4,26 @@
       <h2><%= pluralize(@meetup.errors.count, "error") %> prohibited this meetup from being saved:</h2>
 
       <ul>
-      <% @meetup.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @meetup.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-<div class="field">
+  <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :value => "Coolest meetup in the world" %>
   </div>
 
   <div class="field">
-    <%= f.label :confirmed_date %><br />
-    <%= f.date_select :confirmed_date %>
+    <%= f.label :meetup_type_id %><br />
+    <%= f.select :meetup_type_id, options_for_select(Meetup::MEETUP_TYPE_DESCRIPTIONS.invert(),@meetup.meetup_type_id) %>
   </div>
+
   <div class="field">
-    <%= f.label :confirmed_time %><br />
-    <%= f.time_select :confirmed_time %>
-  </div>
-  <div class="field">
-    <%= f.label :confirmed_venue %><br />
-    <%= f.text_area :confirmed_venue %>
-  </div>
-  <div class="field">
-    <%= f.label :meetup_type %><br />
-    <%= f.text_field :meetup_type %>
-  </div>
-  <div class="field">
-    <%= f.label :venue_link %><br />
-    <%= f.text_area :venue_link%>
-  </div>
-  <div class="field">
-    <%= f.label :invitation_type %><br />
-    <%= f.text_field :invitation_type %>
+    <%= f.label :invitation_type_id %><br />
+    <%= f.select :invitation_type_id, options_for_select(Meetup::INVITATION_TYPE_DESCRIPTIONS.invert(), @meetup.invitation_type_id) %>
 
   </div>
   <div class="actions">

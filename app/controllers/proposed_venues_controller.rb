@@ -24,7 +24,7 @@ class ProposedVenuesController < ApplicationController
   # GET /proposed_venues/new
   # GET /proposed_venues/new.xml
   def new
-    @proposed_venue = ProposedVenue.new
+    @proposed_venue = ProposedVenue.new(:meetup_id => params[:meetup_id])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,6 +41,7 @@ class ProposedVenuesController < ApplicationController
   # POST /proposed_venues.xml
   def create
     @proposed_venue = ProposedVenue.new(params[:proposed_venue])
+    @proposed_venue.proposed_by_user = current_user.id
 
     respond_to do |format|
       if @proposed_venue.save
@@ -80,4 +81,26 @@ class ProposedVenuesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def upvote
+    venue = ProposedVenue.find(params[:venue_id])
+    current_user.up_vote(venue)
+
+    respond_to do |format|
+      format.html { redirect_to(venue.meetup) }
+      format.xml  { head :ok }
+    end
+  end
+
+  def downvote
+    venue = ProposedVenue.find(params[:venue_id])
+    current_user.down_vote(venue)
+
+    respond_to do |format|
+      format.html { redirect_to(venue.meetup) }
+      format.xml  { head :ok }
+    end
+
+  end
+
 end

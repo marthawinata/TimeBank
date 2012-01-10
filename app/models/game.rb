@@ -4,7 +4,7 @@ class Game < ActiveRecord::Base
   MOVE_TO_FRONT = 0
   ROTATE_TO_FRONT = 1
 
-  DESCRIPTIONS = {
+  FIRST_TYPE_DESCRIPTION = {
     MOVE_TO_FRONT => "Selected player becomes first, turn order is unchanged otherwise",
     ROTATE_TO_FRONT => "Selected player becomes first, turn order rotates so his prior player is now the last player"
   }
@@ -18,8 +18,8 @@ class Game < ActiveRecord::Base
     :numericality => { :only_integer => true,:greater_than => 0 }
   validates :name, :presence => true, :on => :create
 
-  def get_first_type_description(description)
-    return DESCRIPTIONS[description]
+  def get_first_type_description(first_type_id)
+    return FIRST_TYPE_DESCRIPTION[first_type_id]
   end
 
   def first_type_description

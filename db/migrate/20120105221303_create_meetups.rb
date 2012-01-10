@@ -6,9 +6,9 @@ class CreateMeetups < ActiveRecord::Migration
       t.date :confirmed_date
       t.time :confirmed_time
       t.text :confirmed_venue
-      t.string :meetup_type
+      t.integer :meetup_type_id, :default => Meetup::PUBLIC
       t.text :venue_link
-      t.string :invitation_type
+      t.integer :invitation_type_id, :default => Meetup::LIMITED
 
       t.timestamps
     end

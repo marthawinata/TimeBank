@@ -6,16 +6,16 @@ describe "meetups/index.html.erb" do
       stub_model(Meetup,
         :host_player_id => 1,
         :confirmed_venue => "MyText",
-        :meetup_type => "Meetup Type",
+        :meetup_type_id => "Meetup Type",
         :venue_link => "MyText",
-        :invitation_type => "Invitation Type"
+        :invitation_type_id => "Invitation Type"
       ),
       stub_model(Meetup,
         :host_player_id => 1,
         :confirmed_venue => "MyText",
-        :meetup_type => "Meetup Type",
+        :meetup_type_id => "Meetup Type",
         :venue_link => "MyText",
-        :invitation_type => "Invitation Type"
+        :invitation_type_id => "Invitation Type"
       )
     ])
   end

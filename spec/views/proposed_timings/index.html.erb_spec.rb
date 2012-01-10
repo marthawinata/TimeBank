@@ -5,11 +5,11 @@ describe "proposed_timings/index.html.erb" do
     assign(:proposed_timings, [
       stub_model(ProposedTiming,
         :meetup_id => 1,
-        :proposed_by_player => 1
+        :proposed_by_user => 1
       ),
       stub_model(ProposedTiming,
         :meetup_id => 1,
-        :proposed_by_player => 1
+        :proposed_by_user => 1
       )
     ])
   end

@@ -1,9 +1,11 @@
 class MeetupsController < ApplicationController
+  before_filter :authenticate_user!
+  
   # GET /meetups
   # GET /meetups.xml
   def index
     @meetups = Meetup.all
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @meetups }
@@ -15,7 +17,10 @@ class MeetupsController < ApplicationController
   def show
     @meetup = Meetup.find(params[:id])
     @host_user = current_user
-
+    @proposed_timings = @meetup.proposed_timings
+    @available_boardgames = @meetup.available_boardgames
+    @proposed_venues = @meetup.proposed_venues
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @meetup }

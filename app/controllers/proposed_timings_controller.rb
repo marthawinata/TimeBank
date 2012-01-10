@@ -24,8 +24,8 @@ class ProposedTimingsController < ApplicationController
   # GET /proposed_timings/new
   # GET /proposed_timings/new.xml
   def new
-    @proposed_timing = ProposedTiming.new
-
+    @proposed_timing = ProposedTiming.new(:meetup_id => params[:meetup_id])
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @proposed_timing }
@@ -41,7 +41,7 @@ class ProposedTimingsController < ApplicationController
   # POST /proposed_timings.xml
   def create
     @proposed_timing = ProposedTiming.new(params[:proposed_timing])
-
+    @proposed_timing.proposed_by_user = current_user.id
     respond_to do |format|
       if @proposed_timing.save
         format.html { redirect_to(@proposed_timing, :notice => 'Proposed timing was successfully created.') }
@@ -79,5 +79,26 @@ class ProposedTimingsController < ApplicationController
       format.html { redirect_to(proposed_timings_url) }
       format.xml  { head :ok }
     end
+  end
+
+  def upvote
+    timing = ProposedTiming.find(params[:timing_id])
+    current_user.up_vote(timing)
+
+    respond_to do |format|
+      format.html { redirect_to(timing.meetup) }
+      format.xml  { head :ok }
+    end
+  end
+
+  def downvote
+    timing = ProposedTiming.find(params[:timing_id])
+    current_user.down_vote(timing)
+
+    respond_to do |format|
+      format.html { redirect_to(timing.meetup) }
+      format.xml  { head :ok }
+    end
+
   end
 end

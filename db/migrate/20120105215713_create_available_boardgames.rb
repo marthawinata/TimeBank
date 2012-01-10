@@ -1,6 +1,6 @@
-class CreateBoardgamesMeetups < ActiveRecord::Migration
+class CreateAvailableBoardgames < ActiveRecord::Migration
   def self.up
-    create_table :boardgames_meetups do |t|
+    create_table :available_boardgames do |t|
       t.integer :boardgame_id
       t.integer :meetup_id
       t.integer :user_id
@@ -10,6 +10,6 @@ class CreateBoardgamesMeetups < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :boardgames_meetups
+    drop_table :available_boardgames
   end
 end

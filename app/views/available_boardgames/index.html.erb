@@ -2,7 +2,7 @@
 
 <table>
   <tr>
-    <th>Collection</th>
+    <th>Boardgame</th>
     <th>Meetup</th>
     <th></th>
     <th></th>
@@ -11,8 +11,8 @@
 
 <% @available_boardgames.each do |available_boardgame| %>
   <tr>
-    <td><%= available_boardgame.collection_id %></td>
-    <td><%= available_boardgame.meetup_id %></td>
+    <td><%= available_boardgame.boardgame.name unless available_boardgame.boardgame.nil? %></td>
+    <td><%= available_boardgame.meetup.name unless available_boardgame.meetup.nil? %></td>
     <td><%= link_to 'Show', available_boardgame %></td>
     <td><%= link_to 'Edit', edit_available_boardgame_path(available_boardgame) %></td>
     <td><%= link_to 'Destroy', available_boardgame, :confirm => 'Are you sure?', :method => :delete %></td>
