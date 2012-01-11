@@ -3,13 +3,13 @@ class TimerController < ApplicationController
   def index
     @game = Game.find(params[:game_id])
     @game_sessions = GameSession.where(:game_id => params[:game_id]).order :turn_order
-    @first_type_descriptions = Game::DESCRIPTIONS.invert
+    @first_type_descriptions = Game::FIRST_TYPE_DESCRIPTION.invert
   end
 
   def create
     @game = Game.find(params[:game_id])
     @game_sessions = GameSession.where(:game_id => params[:game_id]).order :turn_order
-    @first_type_descriptions = Game::DESCRIPTIONS.invert
+    @first_type_descriptions = Game::FIRST_TYPE_DESCRIPTION.invert
 
     if params["game_time"] then
       update_game_status
@@ -81,7 +81,7 @@ class TimerController < ApplicationController
   end
 
   def change_game_settings
-    @first_type_descriptions = Game::DESCRIPTIONS.invert
+    @first_type_descriptions = Game::FIRST_TYPE_DESCRIPTION.invert
     @game = Game.find(params[:game_id])
     @game.time_per_turn = params["new_time_per_turn"]
     @game.interlude_per_turn = params["new_interlude_per_turn"]

@@ -1,13 +1,23 @@
 TimeBank::Application.routes.draw do
 
+  get "bgg_scraper/index"
+
+  get "bgg_scraper/scrape_game"
+
   devise_for :users
 
+  get 'proposed_venues/upvote' => 'proposed_venues#upvote', :as => :upvote_venue
+  get 'proposed_venues/downvote' => 'proposed_venues#downvote', :as => :downvote_venue
   resources :proposed_venues
 
+  get 'proposed_timings/upvote' => 'proposed_timings#upvote', :as => :upvote_timing
+  get 'proposed_timings/downvote' => 'proposed_timings#downvote', :as => :downvote_timing
   resources :proposed_timings
 
   resources :meetups
 
+  get 'available_boardgames/upvote' => 'available_boardgames#upvote', :as => :upvote_boardgame
+  get 'available_boardgames/downvote' => 'available_boardgames#downvote', :as => :downvote_boardgame
   resources :available_boardgames
 
   resources :collections

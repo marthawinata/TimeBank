@@ -2,18 +2,14 @@
 
 <p>
   <b>Player:</b>
-  <%= @collection.player_id %>
+  <%= @collection.user.email %>
 </p>
 
 <p>
   <b>Boardgame:</b>
-  <%= @collection.boardgame_id %>
+  <%= @collection.boardgame.name %>
 </p>
 
-<p>
-  <b>Bought at:</b>
-  <%= @collection.bought_at %>
-</p>
 
 
 <%= link_to 'Edit', edit_collection_path(@collection) %> |

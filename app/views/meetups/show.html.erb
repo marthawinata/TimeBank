@@ -1,40 +1,39 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Host player:</b>
-  <%= @meetup.host_player_id %>
+  <b>Name</b>
+  <%= @meetup.name %>
 </p>
 
 <p>
-  <b>Confirmed date:</b>
-  <%= @meetup.confirmed_date %>
-</p>
-
-<p>
-  <b>Confirmed time:</b>
-  <%= @meetup.confirmed_time %>
-</p>
-
-<p>
-  <b>Confirmed venue:</b>
-  <%= @meetup.confirmed_venue %>
+  <b>Host User</b>
+  <%= @meetup.host_user.email unless @meetup.host_user.nil? %>
 </p>
 
 <p>
   <b>Meetup type:</b>
-  <%= @meetup.meetup_type %>
-</p>
-
-<p>
-  <b>Venue link:</b>
-  <%= @meetup.venue_link %>
+  <%= @meetup.meetup_type_description %>
 </p>
 
 <p>
   <b>Invitation type:</b>
-  <%= @meetup.invitation_type %>
+  <%= @meetup.invitation_type_description %>
 </p>
 
+<h1>Proposing some boardgames</h1>
+<div id="boardgames_area">
+  <%= render 'boardgames_area' %>
+</div>
+
+<h1>Proposing some timings</h1>
+<div id="timings_area">
+  <%= render 'timings_area' %>
+</div>
+
+<h1>Proposing some venues</h1>
+<div id="venues_area">
+  <%= render 'venues_area' %>
+</div>
 
 <%= link_to 'Edit', edit_meetup_path(@meetup) %> |
 <%= link_to 'Back', meetups_path %>

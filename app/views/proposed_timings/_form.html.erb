@@ -4,21 +4,14 @@
       <h2><%= pluralize(@proposed_timing.errors.count, "error") %> prohibited this proposed_timing from being saved:</h2>
 
       <ul>
-      <% @proposed_timing.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @proposed_timing.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :meetup_id %><br />
-    <%= f.text_field :meetup_id %>
-  </div>
-  <div class="field">
-    <%= f.label :proposed_by_player %><br />
-    <%= f.text_field :proposed_by_player %>
-  </div>
+
   <div class="field">
     <%= f.label :proposed_date %><br />
     <%= f.date_select :proposed_date %>
@@ -27,7 +20,12 @@
     <%= f.label :proposed_time %><br />
     <%= f.time_select :proposed_time %>
   </div>
+
+  <%= f.hidden_field :meetup_id, :value => @proposed_timing.meetup_id %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
+
+
 <% end %>

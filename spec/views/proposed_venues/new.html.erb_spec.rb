@@ -4,7 +4,7 @@ describe "proposed_venues/new.html.erb" do
   before(:each) do
     assign(:proposed_venue, stub_model(ProposedVenue,
       :meetup_id => 1,
-      :proposed_by_player => 1,
+      :proposed_by_user => 1,
       :description => "MyText",
       :venue_link => "MyText"
     ).as_new_record)

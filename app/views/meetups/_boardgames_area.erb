@@ -1,0 +1,29 @@
+<table>
+  <tr>
+    <th>Boardgame</th>
+    <th>Standalone game?</th>
+    <th>Owner</th>
+    <th>Votes #</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @available_boardgames.each do |avail| %>
+  <tr>
+    <td><a href=<%= "http://boardgamegeek.com/boardgame/"+ avail.boardgame.bgg_id.to_s %>><%= avail.boardgame.name %></a></td>
+    <td><%= avail.boardgame.is_standalone %></td>
+    <td><%= avail.user.email unless avail.user.nil? %></td>
+    <td><%= avail.votes %></td>
+    <td><%= link_to 'Show', avail %></td>
+    <td><%= link_to 'Edit', edit_available_boardgame_path(avail) %></td>
+    <td><%= link_to 'Destroy', avail, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Up', upvote_boardgame_path(:available_boardgame_id => avail.id) %></td>
+    <td><%= link_to 'Down', downvote_boardgame_path(:available_boardgame_id => avail.id)  %></td>
+
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'New boardgame to bring', new_available_boardgame_path(:meetup_id => @meetup.id) %>

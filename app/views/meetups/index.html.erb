@@ -2,12 +2,9 @@
 
 <table>
   <tr>
-    <th>Host player</th>
-    <th>Confirmed date</th>
-    <th>Confirmed time</th>
-    <th>Confirmed venue</th>
+    <th>Name</th>
+    <th>Host user</th>
     <th>Meetup type</th>
-    <th>Venue link</th>
     <th>Invitation type</th>
     <th></th>
     <th></th>
@@ -16,13 +13,10 @@
 
 <% @meetups.each do |meetup| %>
   <tr>
-    <td><%= meetup.host_player_id %></td>
-    <td><%= meetup.confirmed_date %></td>
-    <td><%= meetup.confirmed_time %></td>
-    <td><%= meetup.confirmed_venue %></td>
-    <td><%= meetup.meetup_type %></td>
-    <td><%= meetup.venue_link %></td>
-    <td><%= meetup.invitation_type %></td>
+    <td><%= meetup.name %></td>
+    <td><%= meetup.host_user.email unless meetup.host_user.nil? %></td>
+    <td><%= meetup.meetup_type_description %></td>
+    <td><%= meetup.invitation_type_description %></td>
     <td><%= link_to 'Show', meetup %></td>
     <td><%= link_to 'Edit', edit_meetup_path(meetup) %></td>
     <td><%= link_to 'Destroy', meetup, :confirm => 'Are you sure?', :method => :delete %></td>

@@ -11,14 +11,8 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :meetup_id %><br />
-    <%= f.text_field :meetup_id %>
-  </div>
-  <div class="field">
-    <%= f.label :proposed_by_player %><br />
-    <%= f.text_field :proposed_by_player %>
-  </div>
+ <%= f.hidden_field :meetup_id, :value => @proposed_venue.meetup_id %>
+
   <div class="field">
     <%= f.label :description %><br />
     <%= f.text_area :description %>

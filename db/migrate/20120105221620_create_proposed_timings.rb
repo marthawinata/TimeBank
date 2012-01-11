@@ -2,7 +2,7 @@ class CreateProposedTimings < ActiveRecord::Migration
   def self.up
     create_table :proposed_timings do |t|
       t.integer :meetup_id
-      t.integer :proposed_by_player
+      t.integer :proposed_by_user
       t.date :proposed_date
       t.time :proposed_time
 

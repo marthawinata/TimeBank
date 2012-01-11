@@ -1,0 +1,26 @@
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Votes #</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @proposed_timings.each do |timing| %>
+  <tr>
+    <td><%= timing.proposed_date.strftime("%Y %m %d") %></td>
+    <td><%= timing.proposed_time.strftime("%H:%M") unless timing.nil? %></td>
+    <td><%= timing.votes %></td>
+    <td><%= link_to 'Show', timing %></td>
+    <td><%= link_to 'Edit', edit_proposed_timing_path(timing) %></td>
+    <td><%= link_to 'Destroy', timing, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Up', upvote_timing_path(:timing_id => timing.id) %></td>
+    <td><%= link_to 'Down', downvote_timing_path(:timing_id => timing.id) %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'New Proposed timing', new_proposed_timing_path(:meetup_id => @meetup.id) %>

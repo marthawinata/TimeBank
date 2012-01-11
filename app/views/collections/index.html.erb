@@ -2,9 +2,8 @@
 
 <table>
   <tr>
-    <th>Player</th>
+    <th>User</th>
     <th>Boardgame</th>
-    <th>Bought at</th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,9 +11,8 @@
 
 <% @collections.each do |collection| %>
   <tr>
-    <td><%= collection.player_id %></td>
-    <td><%= collection.boardgame_id %></td>
-    <td><%= collection.bought_at %></td>
+    <td><%= collection.user.email unless collection.user.nil? %></td>
+    <td><%= collection.boardgame.name unless collection.boardgame.nil?  %></td>
     <td><%= link_to 'Show', collection %></td>
     <td><%= link_to 'Edit', edit_collection_path(collection) %></td>
     <td><%= link_to 'Destroy', collection, :confirm => 'Are you sure?', :method => :delete %></td>

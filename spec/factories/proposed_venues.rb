@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :proposed_venue do
     meetup_id 1
-    proposed_by_player 1
+    proposed_by_user 1
     description "MyText"
     venue_link "MyText"
   end
