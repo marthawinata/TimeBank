@@ -47,6 +47,7 @@ class InvitationsController < ApplicationController
     
     respond_to do |format|
       if @invitation.save
+        UserMailer.invitation_email(current_user,@invitation.meetup).deliver
         format.html { redirect_to(@invitation, :notice => 'Invitation was successfully created.') }
         format.xml  { render :xml => @invitation, :status => :created, :location => @invitation }
       else
