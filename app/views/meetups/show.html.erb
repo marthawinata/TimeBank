@@ -20,6 +20,10 @@
   <%= @meetup.invitation_type_description %>
 </p>
 
+<p>
+  <%= link_to 'Invite others', new_invitation_path(:meetup_id => @meetup.id) %>
+</p>
+
 <h1>Proposing some boardgames</h1>
 <div id="boardgames_area">
   <%= render 'boardgames_area' %>

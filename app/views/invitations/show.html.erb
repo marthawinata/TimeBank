@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  Invite for <%= @meetup.name %> has been sent to <%= @invitation.email %>
+</p>
+
+<%= link_to 'Edit', edit_invitation_path(@invitation) %> |
+<%= link_to 'Back', invitations_path %>

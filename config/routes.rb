@@ -1,5 +1,7 @@
 TimeBank::Application.routes.draw do
 
+  resources :invitations
+
   get "bgg_scraper/index"
 
   get "bgg_scraper/scrape_game"
