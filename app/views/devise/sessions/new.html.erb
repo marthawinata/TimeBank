@@ -3,12 +3,12 @@
 Sign in using any of the following OpenID providers:
 <%= form_tag(session_path(resource), {"data-ajax" => "false"} ) do %>
   <%= hidden_field_tag "user[identity_url]", "https://www.google.com/accounts/o8/id" %>
-  <%= image_submit_tag "google-openid.png", :width => 180, :height => 53, "data-inline" => true, "data-corners" => false %>
+  <%= image_submit_tag "google-openid.png", :width => 120, :height => 43, "data-role" => "none" %>
 <% end %>
 
 <%= form_tag(session_path(resource), {"data-ajax" => "false"} ) do %>
   <%= hidden_field_tag "user[identity_url]", "http://yahoo.com" %>
-  <%= image_submit_tag "yahoo-openid.png", :width => 238, :height => 48, "data-inline" => true, "data-corners" => false %>
+  <%= image_submit_tag "yahoo-openid.png", :width => 120, :height => 24, "data-role" => "none" %>
 <% end %>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html =>  {"data-ajax" => "false"} ) do |f| %>
