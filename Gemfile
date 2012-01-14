@@ -9,6 +9,7 @@ gem 'make_voteable'
 gem 'nokogiri'
 gem 'mechanize'
 gem 'devise_openid_authenticatable'
+gem 'yaml_db'
 
 
 # Bundle edge Rails instead:

@@ -2,19 +2,8 @@
 
 <%= form_tag({:action => :scrape_game},{:method => "post", 'data-ajax' => "false"}) do %>
 
-  <div class="field">
-    <%= label_tag "BGG boardgame ID to scrape from" %><br />
-    <%= text_field_tag "scrape_from", '31259'%>
-  </div>
-
-  <div class="field">
-    <%= label_tag "BGG boardgame ID to scrape until" %><br />
-    <%= text_field_tag "scrape_until", '31265' %>
-  </div>
-
-
   <div class="actions">
-    <%= submit_tag "Scrape games!" %>
+    <%= submit_tag "Scrape 1000 games!" %>
   </div>
 <% end %>
 
