@@ -20,6 +20,18 @@
   <%= @meetup.invitation_type_description %>
 </p>
 
+<table>
+  <tr>
+    <th>Who's coming?</th>
+  </tr>
+
+  <% @users.each do |user| %>
+  <tr>
+    <td><%= user.email %></td>
+  </tr>
+<% end %>
+</table>
+
 <p>
   <%= link_to 'Invite others', new_invitation_path(:meetup_id => @meetup.id) %>
 </p>

@@ -1,5 +1,6 @@
 TimeBank::Application.routes.draw do
 
+  get 'invitations/receive_response' => 'invitations#receive_response'
   resources :invitations
 
   get "bgg_scraper/index"

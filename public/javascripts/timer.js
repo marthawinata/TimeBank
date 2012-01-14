@@ -55,6 +55,7 @@ function GamePlayer(player_num) {
     this.turn_timer = new Timer($('#player_turn_time_' + player_num), false);
     this.time_bank_timer = new Timer($('#player_time_bank_' + player_num), false);
     this.time_taken = new Timer($('#player_time_taken_so_far_' + player_num), true);
+    this.player_name = $('#player_name_' + player_num).val();
 }
 
 function GameStatus() {
@@ -136,13 +137,13 @@ function Game() {
             return;
         }
         var currentPlayer = instance.players[turnNumber-1];
-        instance.status.show($("#player_name_"+turnNumber).val() + "'s turn now");
+        instance.status.show(currentPlayer.player_name + "'s turn now");
         if (currentPlayer.turn_timer.timeString() === "00:10") {
             $("#message_time").css('color', "red");
         }
         if (currentPlayer.turn_timer.timeString() === "00:00"
             && currentPlayer.time_bank_timer.timeString() === "00:00") {
-            instance.status.show("skipping player "  + $("#player_name_"+turnNumber).val()
+            instance.status.show("skipping player "  + currentPlayer.player_name
                 + ", no more time left for this turn");
             instance.nextPlayer();
         } else {
@@ -151,8 +152,8 @@ function Game() {
             } else {
                 currentPlayer.turn_timer.tickDown();
             }
-            $("#message_time").html($("#player_turn_time_" + turnNumber).val() +
-            " &nbsp&nbsp&nbsp&nbsp&nbsp with timebank: "+ $("#player_time_bank_" + turnNumber).val());
+            $("#message_time").html(currentPlayer.turn_timer.timeString() +
+            " &nbsp&nbsp&nbsp&nbsp&nbsp with timebank: "+ currentPlayer.time_bank_timer.timeString());
 
         }
 
