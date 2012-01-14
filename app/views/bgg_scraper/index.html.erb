@@ -2,8 +2,23 @@
 
 <%= form_tag({:action => :scrape_game},{:method => "post", 'data-ajax' => "false"}) do %>
 
+  <div>
+    <%= label_tag :pages, "Pages to scrape (100 per page)" %>
+    <%= text_field_tag :pages, 10 %>
+  </div>
   <div class="actions">
-    <%= submit_tag "Scrape 1000 games!" %>
+    <%= submit_tag "Scrape games!" %>
+  </div>
+<% end %>
+
+<%= form_tag({:action => :get_collection},{:method => "post", 'data-ajax' => "false"}) do %>
+  <div>
+    <%= label_tag :username, "User"  %>
+    <%= text_field_tag :username   %>
+  </div>
+
+  <div class="actions">
+    <%= submit_tag "Find collections" %>
   </div>
 <% end %>
 
@@ -26,6 +41,21 @@
     <td><%= boardgame.is_standalone %></td>
     <td><%= boardgame.parent.name unless boardgame.parent.nil? %></td>
     
+  </tr>
+<% end %>
+
+</table>
+<table>
+<% @collection_items.each do |collection_item| %>
+  <tr>
+    <td><%= collection_item.id %></td>
+    <td>
+      <a href=<%= "http://boardgamegeek.com/boardgame/#{collection_item.boardgame.bgg_id}"%> >
+        <%= collection_item.boardgame.name %>
+      </a>
+    </td>
+    <td><%= collection_item.user.email %></td>
+
   </tr>
 <% end %>
 </table>
