@@ -1,9 +1,9 @@
 class UserMailer < ActionMailer::Base
   default :from => "from@example.com"
 
-  def invitation_email(user,meetup)
+  def invitation_email(user,invitation)
     @user = user
-    @meetup = meetup
-    mail(:to => 'marthawinata@gmail.com', :subject => "You have been invited to #{@meetup.name}")
+    @invitation = invitation
+    mail(:to => 'marthawinata@gmail.com', :subject => "You have been invited to #{@invitation.meetup.name}")
   end
 end

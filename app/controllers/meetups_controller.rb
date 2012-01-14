@@ -20,6 +20,7 @@ class MeetupsController < ApplicationController
     @proposed_timings = @meetup.proposed_timings
     @available_boardgames = @meetup.available_boardgames
     @proposed_venues = @meetup.proposed_venues
+    @users = @meetup.users
     
     respond_to do |format|
       format.html # show.html.erb

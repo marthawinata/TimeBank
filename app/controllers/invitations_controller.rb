@@ -1,4 +1,5 @@
 class InvitationsController < ApplicationController
+
   # GET /invitations
   # GET /invitations.xml
   def index
@@ -7,6 +8,21 @@ class InvitationsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @invitations }
+    end
+  end
+
+  def receive_response
+    invitation = Invitation.where(:secret_url => params[:url]).first
+    unless invitation.nil?
+      user = User.where(:email => invitation.email).first || User.new(:email => invitation.email,
+        :password => "aaaaaaaa", :is_registered => false)
+      user.save
+      invitation.meetup.users.push(user) unless invitation.meetup.users.include?(user)
+      invitation.meetup.save
+      sign_in(:user, user)
+      
+
+      redirect_to invitation.meetup
     end
   end
 
@@ -42,12 +58,11 @@ class InvitationsController < ApplicationController
   # POST /invitations.xml
   def create
     @invitation = Invitation.new(params[:invitation])
-
-    #needs to email here
+    @invitation.secret_url = (0...50).map{ ('a'..'z').to_a[rand(26)] }.join
     
     respond_to do |format|
       if @invitation.save
-        UserMailer.invitation_email(current_user,@invitation.meetup).deliver
+        UserMailer.invitation_email(current_user,@invitation).deliver
         format.html { redirect_to(@invitation, :notice => 'Invitation was successfully created.') }
         format.xml  { render :xml => @invitation, :status => :created, :location => @invitation }
       else
@@ -84,4 +99,6 @@ class InvitationsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+
 end

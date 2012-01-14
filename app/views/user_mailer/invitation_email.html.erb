@@ -6,8 +6,9 @@
   <body>
     <h1>Welcome to example.com, <%= @user.email %></h1>
     <p>
-      You have been invited to <%= @meetup.name %>
+      You have been invited to <%= @invitation.meetup.name %>
       your email to use is: <%= @user.email %>.<br/>
+      Click on <a href=<%= "http://localhost:3000/invitations/receive_response?url=#{@invitation.secret_url}" %>>this link to see the meetup</a>
     </p>
   </body>
 </html>

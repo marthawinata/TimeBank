@@ -2,7 +2,10 @@
 
 <p>
   Invite for <%= @meetup.name %> has been sent to <%= @invitation.email %>
+
+  Click on <a href=<%= "http://localhost:3000/url/#{@invitation.secret_url}" %>>this link to see the meetup</a>
 </p>
+
 
 <%= link_to 'Edit', edit_invitation_path(@invitation) %> |
 <%= link_to 'Back', invitations_path %>
