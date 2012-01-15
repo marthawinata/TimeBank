@@ -11,12 +11,42 @@
     </div>
   <% end %>
 
-<div class="field">
+  <div class="field">
     <%= f.label :boardgame_id %><br />
-    <%= f.select :boardgame_id, options_from_collection_for_select(@boardgames, "id", "name") %>
+    <%= f.select :boardgame_id, options_from_collection_for_select(@available_boardgames, "id", "name", @selected_boardgame_ids), {:include_blank => "Select a game from your collection"}, {"data-native-menu" => "false", "multiple" => "multiple"} %>
   </div>
-<%= f.hidden_field :meetup_id, :value => @available_boardgame.meetup_id %>
+  <%= f.hidden_field :meetup_id, :value => @available_boardgame.meetup_id %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
+
 <% end %>
+
+<script type="text/javascript">
+  $(function(){
+    $('#available-boardgames-search-area').delegate('.search-boardgame-add', 'click', function(){
+      var row = $(this).closest('.search-boardgame-row'),
+      name = row.find('.search-boardgame-name').text(),
+        id = row.attr('data-boardgame-id');
+      $('#available_boardgame_boardgame_id')
+        .append('<option value=\'' + id + '\' selected=\'selected\'>' + name + '</option>')
+        .selectmenu("refresh");
+    });
+    $.each($('.pagination a'), function(){
+      var href = $(this).attr('href'),
+        search_term = $('#search_term').val();
+      $(this).attr('data-remote', 'true')
+        .attr('data-ajax', 'false')
+        .attr('href', href + '&search_term=' + $('<div/>').text(search_term).html());
+    });
+
+  });
+</script>
+
+<div data-role="collapsible" data-content-theme="c" id="available-boardgames-search-area">
+  <h3>Add a game outside of your collection</h3>
+  <div id="available-boardgames-search-form">
+    <%= render 'search' %>
+  </div>
+</div>

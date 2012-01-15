@@ -34,6 +34,9 @@ TimeBank::Application.routes.draw do
       get 'upvote'
       get 'downvote'
     end
+    collection do
+      get 'search'
+    end
   end
 
   resources :collections do

@@ -1,0 +1,16 @@
+<%#
+# To change this template, choose Tools | Templates
+# and open the template in the editor.
+%>
+
+$('#available-boardgames-search-form')
+  .html("<%= escape_javascript(render('search')) %>")
+  .trigger('create');
+$.each($('.pagination a'), function(){
+  var href = $(this).attr('href'),
+    search_term = $('#search_term').val();
+  $(this).attr('data-remote', 'true')
+    .attr('data-ajax', 'false')
+    .attr('href', href + '&search_term=' + $('<div/>').text(search_term).html());
+});
+

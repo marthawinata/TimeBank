@@ -10,6 +10,7 @@ gem 'nokogiri'
 gem 'mechanize'
 gem 'devise_openid_authenticatable'
 gem 'yaml_db'
+gem 'will_paginate', '~> 3.0'
 
 
 # Bundle edge Rails instead:

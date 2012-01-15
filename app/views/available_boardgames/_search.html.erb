@@ -1,0 +1,24 @@
+<%#
+# To change this template, choose Tools | Templates
+# and open the template in the editor.
+%>
+
+<%= form_tag({:action => 'search', :method => 'get'}, "data-ajax" => "false", :remote => "true") do %>
+
+  <div class="field">
+    <%= label_tag :search_term, "Search" %>
+    <%= text_field_tag :search_term, params[:search_term] %>
+  </div>
+
+  <table>
+  <% @matching_boardgames.each do |matching_boardgame|  %>
+    <tr data-boardgame-id="<%= matching_boardgame.id %>" class="search-boardgame-row">
+      <td class="search-boardgame-name"><%= matching_boardgame.name %></td>
+      <td><a href="#" class="search-boardgame-add">Add</a></td>
+    </tr>
+  <% end %>
+  </table>
+  <%= will_paginate @matching_boardgames unless @matching_boardgames.empty? %>
+
+<% end %>
+
