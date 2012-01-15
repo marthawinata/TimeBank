@@ -83,7 +83,7 @@ class ProposedVenuesController < ApplicationController
   end
 
   def upvote
-    venue = ProposedVenue.find(params[:venue_id])
+    venue = ProposedVenue.find(params[:id])
     current_user.up_vote(venue)
 
     respond_to do |format|
@@ -93,7 +93,7 @@ class ProposedVenuesController < ApplicationController
   end
 
   def downvote
-    venue = ProposedVenue.find(params[:venue_id])
+    venue = ProposedVenue.find(params[:id])
     current_user.down_vote(venue)
 
     respond_to do |format|

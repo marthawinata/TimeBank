@@ -20,8 +20,8 @@
     <% if @meetup.users.include?(current_user) %>
       <td><%= link_to 'Edit', edit_proposed_venue_path(venue) %></td>
       <td><%= link_to 'Destroy', venue, :confirm => 'Are you sure?', :method => :delete %></td>
-      <td><%= link_to 'Up', upvote_venue_path(:venue_id => venue.id) %></td>
-      <td><%= link_to 'Down', downvote_venue_path(:venue_id => venue.id) %></td>
+      <td><%= link_to 'Up', upvote_proposed_venue_path(venue) %></td>
+      <td><%= link_to 'Down', downvote_proposed_venue_path(venue) %></td>
     <% end %>
   </tr>
 <% end %>

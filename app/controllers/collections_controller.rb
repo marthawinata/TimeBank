@@ -1,3 +1,5 @@
+require 'board_game_geek'
+
 class CollectionsController < ApplicationController
   before_filter :authenticate_user!
   
@@ -86,6 +88,25 @@ class CollectionsController < ApplicationController
       format.html { redirect_to(collections_url) }
       format.xml  { head :ok }
     end
+  end
+
+  def import
+    if (current_user.bgg_username.nil?)
+      redirect_to(edit_user_registration_path, :notice => "Need to set BoardGameGeek username in profile to before games can be imported.") and return
+    end
+
+    bgg = BoardGameGeek.new
+    bgg.get_owned_boardgames(current_user.bgg_username).each do |owned_boardgame|
+      if (owned_boardgame.id.nil?)
+        owned_boardgame.save
+      end
+
+      if (Collection.where(:boardgame_id => owned_boardgame.id, :user_id => current_user.id).empty?)
+        Collection.new(:boardgame_id => owned_boardgame.id, :user => current_user).save
+      end
+    end
+
+    redirect_to({:action => 'index'}, :notice => 'Collection from BoardGameGeek was imported successfully')
   end
 end
 

@@ -18,8 +18,8 @@
     <% if @meetup.users.include?(current_user) %>
       <td><%= link_to 'Edit', edit_proposed_timing_path(timing) %></td>
       <td><%= link_to 'Destroy', timing, :confirm => 'Are you sure?', :method => :delete %></td>
-      <td><%= link_to 'Up', upvote_timing_path(:timing_id => timing.id) %></td>
-      <td><%= link_to 'Down', downvote_timing_path(:timing_id => timing.id) %></td>
+      <td><%= link_to 'Up', upvote_proposed_timing_path(timing) %></td>
+      <td><%= link_to 'Down', downvote_proposed_timing_path(timing) %></td>
     <% end %>
   </tr>
 <% end %>

@@ -20,8 +20,8 @@
     <% if @meetup.users.include?(current_user) %>
       <td><%= link_to 'Edit', edit_available_boardgame_path(avail) %></td>
       <td><%= link_to 'Destroy', avail, :confirm => 'Are you sure?', :method => :delete %></td>
-      <td><%= link_to 'Up', upvote_boardgame_path(:available_boardgame_id => avail.id) %></td>
-      <td><%= link_to 'Down', downvote_boardgame_path(:available_boardgame_id => avail.id)  %></td>
+      <td><%= link_to 'Up', upvote_available_boardgame_path(avail) %></td>
+      <td><%= link_to 'Down', downvote_available_boardgame_path(avail)  %></td>
     <% end %>
   </tr>
 <% end %>

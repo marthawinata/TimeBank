@@ -82,7 +82,7 @@ class ProposedTimingsController < ApplicationController
   end
 
   def upvote
-    timing = ProposedTiming.find(params[:timing_id])
+    timing = ProposedTiming.find(params[:id])
     current_user.up_vote(timing)
 
     respond_to do |format|
@@ -92,7 +92,7 @@ class ProposedTimingsController < ApplicationController
   end
 
   def downvote
-    timing = ProposedTiming.find(params[:timing_id])
+    timing = ProposedTiming.find(params[:id])
     current_user.down_vote(timing)
 
     respond_to do |format|

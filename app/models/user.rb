@@ -38,4 +38,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def update_with_password(params={})
+    # if using openId or not changing password, don't require password
+    if (!self.identity_url.nil? || params[:password].empty?)
+      params.delete(:current_password)
+      self.update_without_password(params)
+    else
+      super
+    end
+  end
+
 end

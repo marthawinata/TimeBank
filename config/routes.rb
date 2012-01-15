@@ -9,13 +9,19 @@ TimeBank::Application.routes.draw do
 
   devise_for :users
 
-  get 'proposed_venues/upvote' => 'proposed_venues#upvote', :as => :upvote_venue
-  get 'proposed_venues/downvote' => 'proposed_venues#downvote', :as => :downvote_venue
-  resources :proposed_venues
+  resources :proposed_venues do
+    member do
+      get 'upvote'
+      get 'downvote'
+    end
+  end
 
-  get 'proposed_timings/upvote' => 'proposed_timings#upvote', :as => :upvote_timing
-  get 'proposed_timings/downvote' => 'proposed_timings#downvote', :as => :downvote_timing
-  resources :proposed_timings
+  resources :proposed_timings do
+    member do
+      get 'upvote'
+      get 'downvote'
+    end
+  end
 
   resources :meetups do
     member do
@@ -23,12 +29,18 @@ TimeBank::Application.routes.draw do
     end
   end
 
+  resources :available_boardgames do
+    member do
+      get 'upvote'
+      get 'downvote'
+    end
+  end
 
-  get 'available_boardgames/upvote' => 'available_boardgames#upvote', :as => :upvote_boardgame
-  get 'available_boardgames/downvote' => 'available_boardgames#downvote', :as => :downvote_boardgame
-  resources :available_boardgames
-
-  resources :collections
+  resources :collections do
+    collection do
+      get 'import'
+    end
+  end
 
   resources :boardgames
   

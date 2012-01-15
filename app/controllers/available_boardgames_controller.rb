@@ -84,7 +84,7 @@ class AvailableBoardgamesController < ApplicationController
     end
   end
   def upvote
-    available_boardgame = AvailableBoardgame.find(params[:available_boardgame_id])
+    available_boardgame = AvailableBoardgame.find(params[:id])
     current_user.up_vote(available_boardgame)
 
     respond_to do |format|
@@ -94,7 +94,7 @@ class AvailableBoardgamesController < ApplicationController
   end
 
   def downvote
-    available_boardgame = AvailableBoardgame.find(params[:available_boardgame_id])
+    available_boardgame = AvailableBoardgame.find(params[:id])
     current_user.down_vote(available_boardgame)
 
     respond_to do |format|
