@@ -17,8 +17,6 @@ class InvitationsController < ApplicationController
       user = User.where(:email => invitation.email).first || User.new(:email => invitation.email,
         :password => "aaaaaaaa", :is_registered => false)
       user.save
-      invitation.meetup.users.push(user) unless invitation.meetup.users.include?(user)
-      invitation.meetup.save
       sign_in(:user, user)
       
 
@@ -42,10 +40,14 @@ class InvitationsController < ApplicationController
   # GET /invitations/new.xml
   def new
     @invitation = Invitation.new(:meetup_id => params[:meetup_id])
+    if @invitation.meetup.can_join?(current_user)
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @invitation }
+      respond_to do |format|
+        format.html # new.html.erb
+        format.xml  { render :xml => @invitation }
+      end
+    else
+      redirect_to @invitation.meetup, :notice => "cannot invite others on this meetup"
     end
   end
 
@@ -62,6 +64,7 @@ class InvitationsController < ApplicationController
     
     respond_to do |format|
       if @invitation.save
+        
         UserMailer.invitation_email(current_user,@invitation).deliver
         format.html { redirect_to(@invitation, :notice => 'Invitation was successfully created.') }
         format.xml  { render :xml => @invitation, :status => :created, :location => @invitation }

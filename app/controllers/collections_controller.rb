@@ -4,7 +4,7 @@ class CollectionsController < ApplicationController
   # GET /collections
   # GET /collections.xml
   def index
-    @collections = Collection.all
+    @collections = Collection.where(:user_id => current_user.id)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -88,3 +88,4 @@ class CollectionsController < ApplicationController
     end
   end
 end
+

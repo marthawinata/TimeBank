@@ -44,8 +44,8 @@ class ProposedTimingsController < ApplicationController
     @proposed_timing.proposed_by_user = current_user.id
     respond_to do |format|
       if @proposed_timing.save
-        format.html { redirect_to(@proposed_timing, :notice => 'Proposed timing was successfully created.') }
-        format.xml  { render :xml => @proposed_timing, :status => :created, :location => @proposed_timing }
+        format.html { redirect_to(@proposed_timing.meetup, :notice => 'Proposed timing was successfully created.') }
+        format.xml  { render :xml => @proposed_timing.meetup, :status => :created, :location => @proposed_timing }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @proposed_timing.errors, :status => :unprocessable_entity }

@@ -7,6 +7,8 @@ class Meetup < ActiveRecord::Base
   has_many :invitations
   belongs_to :host_user, :class_name => "User",:foreign_key => "host_user_id"
 
+  
+
   LIMITED = 0
   OPEN = 1
   CLOSED = 2
@@ -46,6 +48,31 @@ class Meetup < ActiveRecord::Base
   before_validation(:on => :create) do
     self.invitation_type_id ||= LIMITED
     self.meetup_type_id ||= PUBLIC
+  end
+
+  scope :made_public, where(:meetup_type_id => Meetup::PUBLIC).order('updated_at DESC')
+
+  # user can only join if meetup is open, or they are invited
+  def can_join?(user)
+    if self.users.include?(user)
+      return false
+    end
+
+    if self.invitation_type_id == Meetup::OPEN
+      return true
+    end
+
+    self.invitations.where(:email => user.email).each do |invite|
+      return true
+    end
+    return false
+  end
+
+  def can_invite_others?(user)
+    return true if self.invitation_type_id == Meetup::OPEN
+    return true if self.invitation_type_id == Meetup::LIMITED && self.users.include?(user)
+    return true if self.invitation_type_id == Meetup::CLOSED && self.host_user == user
+    return false
   end
   
 end

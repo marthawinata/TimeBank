@@ -47,8 +47,8 @@ class AvailableBoardgamesController < ApplicationController
     @available_boardgames.user = current_user
     respond_to do |format|
       if @available_boardgames.save
-        format.html { redirect_to(@available_boardgames, :notice => 'Available boardgame was successfully created.') }
-        format.xml  { render :xml => @available_boardgames, :status => :created, :location => @available_boardgames }
+        format.html { redirect_to(@available_boardgames.meetup, :notice => 'Available boardgame was successfully created.') }
+        format.xml  { render :xml => @available_boardgames.meetup, :status => :created, :location => @available_boardgames }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @available_boardgames.errors, :status => :unprocessable_entity }

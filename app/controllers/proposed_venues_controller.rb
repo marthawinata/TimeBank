@@ -45,8 +45,8 @@ class ProposedVenuesController < ApplicationController
 
     respond_to do |format|
       if @proposed_venue.save
-        format.html { redirect_to(@proposed_venue, :notice => 'Proposed venue was successfully created.') }
-        format.xml  { render :xml => @proposed_venue, :status => :created, :location => @proposed_venue }
+        format.html { redirect_to(@proposed_venue.meetup, :notice => 'Proposed venue was successfully created.') }
+        format.xml  { render :xml => @proposed_venue.meetup, :status => :created, :location => @proposed_venue }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @proposed_venue.errors, :status => :unprocessable_entity }

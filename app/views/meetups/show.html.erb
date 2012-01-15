@@ -20,20 +20,34 @@
   <%= @meetup.invitation_type_description %>
 </p>
 
+<%= link_to 'Join this meetup', join_meetup_path if @meetup.can_join?(current_user) %>
+
 <table>
   <tr>
-    <th>Who's coming?</th>
+    <th>Who's in this meetup?</th>
   </tr>
 
-  <% @users.each do |user| %>
+  <% @meetup.users.each do |user| %>
   <tr>
     <td><%= user.email %></td>
   </tr>
 <% end %>
 </table>
 
+<table>
+  <tr>
+    <th>Who's invited to this meetup?</th>
+  </tr>
+
+  <% @meetup.invitations.each do |invitee| %>
+  <tr>
+    <td><%= invitee.email unless invitee.status == Invitation::EXPIRED %></td>
+  </tr>
+  <% end %>
+</table>
+
 <p>
-  <%= link_to 'Invite others', new_invitation_path(:meetup_id => @meetup.id) %>
+  <%= link_to 'Invite others', new_invitation_path(:meetup_id => @meetup.id) if @meetup.can_invite_others?(current_user) %>
 </p>
 
 <h1>Proposing some boardgames</h1>

@@ -17,7 +17,12 @@ TimeBank::Application.routes.draw do
   get 'proposed_timings/downvote' => 'proposed_timings#downvote', :as => :downvote_timing
   resources :proposed_timings
 
-  resources :meetups
+  resources :meetups do
+    member do
+      get 'join'
+    end
+  end
+
 
   get 'available_boardgames/upvote' => 'available_boardgames#upvote', :as => :upvote_boardgame
   get 'available_boardgames/downvote' => 'available_boardgames#downvote', :as => :downvote_boardgame

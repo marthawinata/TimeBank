@@ -4,11 +4,23 @@ class MeetupsController < ApplicationController
   # GET /meetups
   # GET /meetups.xml
   def index
-    @meetups = Meetup.all
+    @meetups = current_user.meetups
     
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @meetups }
+    end
+  end
+
+  def join
+    meetup = Meetup.where(:id => params[:id]).first
+    if meetup.can_join?(current_user)
+      meetup.users.push(current_user) unless meetup.users.include?(current_user)
+      meetup.invitations.where(:email => current_user.email).each {|invite| invite.expire}
+      meetup.save
+      redirect_to(meetup, :notice => "User #{current_user.email} has successfully joined #{meetup.name}")
+    else
+      redirect_to(meetup, :notice => "User does not have permission to join #{meetup.name}")
     end
   end
 
@@ -20,7 +32,6 @@ class MeetupsController < ApplicationController
     @proposed_timings = @meetup.proposed_timings
     @available_boardgames = @meetup.available_boardgames
     @proposed_venues = @meetup.proposed_venues
-    @users = @meetup.users
     
     respond_to do |format|
       format.html # show.html.erb
@@ -51,6 +62,7 @@ class MeetupsController < ApplicationController
   def create
     @meetup = Meetup.new(params[:meetup])
     @meetup.host_user = current_user
+    @meetup.users.push(current_user)
     respond_to do |format|
       if @meetup.save
         format.html { redirect_to(@meetup, :notice => 'Meetup was successfully created.') }

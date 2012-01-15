@@ -15,12 +15,14 @@
     <td><%= timing.proposed_time.strftime("%H:%M") unless timing.nil? %></td>
     <td><%= timing.votes %></td>
     <td><%= link_to 'Show', timing %></td>
-    <td><%= link_to 'Edit', edit_proposed_timing_path(timing) %></td>
-    <td><%= link_to 'Destroy', timing, :confirm => 'Are you sure?', :method => :delete %></td>
-    <td><%= link_to 'Up', upvote_timing_path(:timing_id => timing.id) %></td>
-    <td><%= link_to 'Down', downvote_timing_path(:timing_id => timing.id) %></td>
+    <% if @meetup.users.include?(current_user) %>
+      <td><%= link_to 'Edit', edit_proposed_timing_path(timing) %></td>
+      <td><%= link_to 'Destroy', timing, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to 'Up', upvote_timing_path(:timing_id => timing.id) %></td>
+      <td><%= link_to 'Down', downvote_timing_path(:timing_id => timing.id) %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
 
-<%= link_to 'New Proposed timing', new_proposed_timing_path(:meetup_id => @meetup.id) %>
+<%= link_to 'New Proposed timing', new_proposed_timing_path(:meetup_id => @meetup.id) if @meetup.users.include?(current_user)%>

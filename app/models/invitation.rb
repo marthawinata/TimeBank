@@ -17,4 +17,9 @@ class Invitation < ActiveRecord::Base
     return get_invitation_status(self.invitation_status_id)
   end
 
+  def expire
+    self.status = Invitation::EXPIRED
+    self.save
+  end
+
 end
