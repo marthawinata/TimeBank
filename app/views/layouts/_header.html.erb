@@ -1,7 +1,8 @@
 <div data-role="header">
   <h1 text-align="centre">Timebank</h1>
   <% if user_signed_in? %>
-    <%= link_to('Logout', destroy_user_session_path, :method => :delete, :class => ['ui-btn-right','logout-button'], "data-ajax" => false) %>
+    <%= link_to('Edit profile', edit_user_registration_path,  :class => ['edit-profile-button'])  %>
+    <%= link_to('Logout', destroy_user_session_path, :method => :delete, :class => ['logout-button'], "data-ajax" => false) %>
   <% else %>
     <%= link_to('Login', new_user_session_path,  :class => ['ui-btn-right', 'login-button'])  %>
   <% end %>
