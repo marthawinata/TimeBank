@@ -25,7 +25,7 @@ class AvailableBoardgamesController < ApplicationController
   # GET /available_boardgames/new.xml
   def new
     @available_boardgame = AvailableBoardgame.new(:meetup_id => params[:meetup_id])
-    @boardgames = Boardgame.all
+    @boardgames = Boardgame.order("name ASC").all
     
     respond_to do |format|
       format.html # new.html.erb

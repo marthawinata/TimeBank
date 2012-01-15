@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   make_voter
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :identity_url
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :identity_url, :bgg_username
 
   def self.build_from_identity_url(identity_url)
     User.new(:identity_url => identity_url, :password => Devise.friendly_token[0,20])
