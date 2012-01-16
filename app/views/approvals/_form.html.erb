@@ -1,0 +1,20 @@
+<%= form_for(@approval) do |f| %>
+  <% if @approval.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@approval.errors.count, "error") %> prohibited this approval from being saved:</h2>
+
+      <ul>
+      <% @approval.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :meetup_id, :value => @approval.meetup_id %>
+
+  Click submit to send you request to join to the organizers
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

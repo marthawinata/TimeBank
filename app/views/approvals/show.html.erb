@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Meetup:</b>
+  <%= @approval.meetup_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @approval.user_id %>
+</p>
+
+<p>
+  <b>Is approved:</b>
+  <%= @approval.is_approved %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @approval.status %>
+</p>
+
+
+<%= link_to 'Edit', edit_approval_path(@approval) %> |
+<%= link_to 'Back', approvals_path %>

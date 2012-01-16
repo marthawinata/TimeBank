@@ -15,10 +15,14 @@ class MeetupsController < ApplicationController
   def join
     meetup = Meetup.where(:id => params[:id]).first
     if meetup.can_join?(current_user)
-      meetup.users.push(current_user) unless meetup.users.include?(current_user)
-      meetup.invitations.where(:email => current_user.email).each {|invite| invite.expire}
-      meetup.save
-      redirect_to(meetup, :notice => "User #{current_user.email} has successfully joined #{meetup.name}")
+      if meetup.need_approval?(current_user)
+        redirect_to new_approval_path(:meetup_id => meetup.id)
+      else
+        meetup.users.push(current_user) unless meetup.users.include?(current_user)
+        meetup.invitations.where(:email => current_user.email).each {|invite| invite.expire}
+        meetup.save
+        redirect_to(meetup, :notice => "User #{current_user.email} has successfully joined #{meetup.name}")
+      end
     else
       redirect_to(meetup, :notice => "User does not have permission to join #{meetup.name}")
     end
