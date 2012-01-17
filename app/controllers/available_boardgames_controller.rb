@@ -25,10 +25,11 @@ class AvailableBoardgamesController < ApplicationController
   # GET /available_boardgames/new.xml
   def new
     @available_boardgame = AvailableBoardgame.new(:meetup_id => params[:meetup_id])
-    @selected_boardgames = @available_boardgame.meetup.boardgames
-    @owned_boardgames = Collection.where(:user_id => current_user.id).collect { |collection| collection.boardgame }
-    @available_boardgames = @owned_boardgames | @selected_boardgames
-    @selected_boardgame_ids = @selected_boardgames.collect { |boardgame| boardgame.id }
+    
+    @selected_boardgames = AvailableBoardgame.where(:user_id => current_user.id, :meetup_id => params[:meetup_id]).collect { |available_boardgame| available_boardgame.boardgame }
+    @owned_boardgames = Collection.where(:user_id => current_user.id).collect { |collection| collection.boardgame } | @selected_boardgames
+
+    @selected_boardgame_ids = @selected_boardgames.collect { |boardgame| boardgame.id } 
 
     @matching_boardgames = []
 
@@ -48,14 +49,14 @@ class AvailableBoardgamesController < ApplicationController
   # POST /available_boardgames
   # POST /available_boardgames.xml
   def create
-    selected_boardgames = params[:available_boardgame][:boardgame_id]
+    selected_boardgame_ids = params[:available_boardgame][:boardgame_id] || []
     meetup_id = params[:available_boardgame][:meetup_id]
 
-    Meetup.find(meetup_id).available_boardgames.each do |available_boardgame|
-      selected_boardgames.delete(available_boardgame.boardgame_id.to_s)
-    end
+    previously_selected_boardgames = AvailableBoardgame.where(:meetup_id => meetup_id, :user_id => current_user.id)
+    boardgames_to_delete = previously_selected_boardgames.collect { |bg| bg.boardgame_id } - selected_boardgame_ids unless previously_selected_boardgames.nil?
+    AvailableBoardgame.delete_all(:boardgame_id => boardgames_to_delete)
 
-    selected_boardgames.each do |selected_boardgame|
+    selected_boardgame_ids.each do |selected_boardgame|
       available_boardgame = AvailableBoardgame.new(:user => current_user, :meetup_id => meetup_id, :boardgame_id => selected_boardgame)
       available_boardgame.save      
     end

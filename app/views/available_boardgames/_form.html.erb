@@ -11,12 +11,25 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :boardgame_id %><br />
-    <%= f.select :boardgame_id, options_from_collection_for_select(@available_boardgames, "id", "name", @selected_boardgame_ids), {:include_blank => "Select a game from your collection"}, {"data-native-menu" => "false", "multiple" => "multiple"} %>
-  </div>
-  <%= f.hidden_field :meetup_id, :value => @available_boardgame.meetup_id %>
+    <%#= f.label :boardgame_id %><br />
+    <ul data-role="listview" id="selected_boardgames">
+      <% @owned_boardgames.each do |owned_boardgame| %>
+        <%
+          selected = @selected_boardgame_ids.include? owned_boardgame.id
+          icon = selected ? "delete" : "check"
+          link = selected ? "add-game" : "delete-game"
+        %>
+	<li data-icon="<%= icon %>" data-theme="c">
+          <a href="#" data-action="<%= link %>"><img src="/images/logo.jpg" /><h3><%= owned_boardgame.name %></h3></a>
+          <!--<img src="/images/logo.jpg" /><%= owned_boardgame.name %> -->
+          <!-- <a href="#" data-action="<%= link %>"></a> -->
+        </li>
+      <% end %>
+    </ul>
+    <%#= f.select :boardgame_id, options_from_collection_for_select(@owned_boardgames, "id", "name", @selected_boardgame_ids), {:include_blank => "Select a game from your collection"}, {"data-native-menu" => "false", "multiple" => "multiple"} %>
 
+  <%= f.hidden_field :meetup_id, :value => @available_boardgame.meetup_id %>
+  <br/>
   <div class="actions">
     <%= f.submit %>
   </div>
@@ -25,6 +38,19 @@
 
 <script type="text/javascript">
   $(function(){
+    $('ul[data-role="listview"]').delegate('a[data-action="add-game"]', 'click', function(){
+      var item = $(this).attr('data-action', 'delete-game')
+        .closest('li').attr('data-icon', 'check')
+        .find('.ui-icon').removeClass('ui-icon-delete').addClass('ui-icon-check')
+        .closest('ul').listview('refresh');
+    });
+    $('ul[data-role="listview"]').delegate('a[data-action="delete-game"]', 'click', function(){
+      var item = $(this).attr('data-action', 'add-game')
+        .closest('li').attr('data-icon', 'delete')
+        .find('.ui-icon').removeClass('ui-icon-check').addClass('ui-icon-delete')
+        .closest('ul').listview('refresh');
+    });
+
     $('#available-boardgames-search-area').delegate('.search-boardgame-add', 'click', function(){
       var row = $(this).closest('.search-boardgame-row'),
       name = row.find('.search-boardgame-name').text(),
