@@ -11,22 +11,20 @@
     </div>
   <% end %>
 
-    <%#= f.label :boardgame_id %><br />
     <ul data-role="listview" id="selected_boardgames">
       <% @owned_boardgames.each do |owned_boardgame| %>
         <%
           selected = @selected_boardgame_ids.include? owned_boardgame.id
-          icon = selected ? "delete" : "check"
-          link = selected ? "add-game" : "delete-game"
+          icon = selected ? "check" : "delete"
+          link = selected ? "delete-game" : "add-game"
         %>
 	<li data-icon="<%= icon %>" data-theme="c">
-          <a href="#" data-action="<%= link %>"><img src="/images/logo.jpg" /><h3><%= owned_boardgame.name %></h3></a>
+          <a href="#" data-action="<%= link %>" data-boardgame-id="<%= owned_boardgame.id  %>"><img src="/images/logo.jpg" /><h3><%= owned_boardgame.name %></h3></a>
           <!--<img src="/images/logo.jpg" /><%= owned_boardgame.name %> -->
           <!-- <a href="#" data-action="<%= link %>"></a> -->
         </li>
       <% end %>
     </ul>
-    <%#= f.select :boardgame_id, options_from_collection_for_select(@owned_boardgames, "id", "name", @selected_boardgame_ids), {:include_blank => "Select a game from your collection"}, {"data-native-menu" => "false", "multiple" => "multiple"} %>
 
   <%= f.hidden_field :meetup_id, :value => @available_boardgame.meetup_id %>
   <br/>
@@ -41,23 +39,34 @@
     $('ul[data-role="listview"]').delegate('a[data-action="add-game"]', 'click', function(){
       var item = $(this).attr('data-action', 'delete-game')
         .closest('li').attr('data-icon', 'check')
-        .find('.ui-icon').removeClass('ui-icon-delete').addClass('ui-icon-check')
-        .closest('ul').listview('refresh');
+        .find('.ui-icon').removeClass('ui-icon-delete').addClass('ui-icon-check');
     });
     $('ul[data-role="listview"]').delegate('a[data-action="delete-game"]', 'click', function(){
       var item = $(this).attr('data-action', 'add-game')
         .closest('li').attr('data-icon', 'delete')
-        .find('.ui-icon').removeClass('ui-icon-check').addClass('ui-icon-delete')
-        .closest('ul').listview('refresh');
+        .find('.ui-icon').removeClass('ui-icon-check').addClass('ui-icon-delete');
     });
+    $('#new_available_boardgame').submit(function(e){
+      var form = $(this),
+          boardgame_select = $('<select id="boardgame_id_select" name="available_boardgame[boardgame_id][]" style="display:none" data-role="none" multiple="multiple"></select>');
+          
+      $('#boardgame_id_select').remove();
+      $('li a[data-action="delete-game"]').each(function(index, elt) {
+        var id = $(this).attr('data-boardgame-id');
+        boardgame_select
+          .append('<option selected="selected" value="' + id + '">' + id + '</option>');
 
+      });
+      form.append(boardgame_select);
+    });
     $('#available-boardgames-search-area').delegate('.search-boardgame-add', 'click', function(){
       var row = $(this).closest('.search-boardgame-row'),
       name = row.find('.search-boardgame-name').text(),
         id = row.attr('data-boardgame-id');
-      $('#available_boardgame_boardgame_id')
-        .append('<option value=\'' + id + '\' selected=\'selected\'>' + name + '</option>')
-        .selectmenu("refresh");
+      $('#selected_boardgames')
+        .append('<li data-icon="check" data-theme="c"><a href="#" data-action="delete-game" data-boardgame-id="' + id + '"><img src="/images/logo.jpg" /><h3>' + name + '</h3></a></li>');
+      $('#selected_boardgames').listview('refresh');
+
     });
     $.each($('.pagination a'), function(){
       var href = $(this).attr('href'),
