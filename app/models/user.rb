@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_many :collections
   has_and_belongs_to_many :meetups
   has_many :available_boardgames
+  has_many :approvals
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable

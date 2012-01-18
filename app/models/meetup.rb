@@ -6,6 +6,7 @@ class Meetup < ActiveRecord::Base
   has_many :proposed_venues
   has_many :invitations
   belongs_to :host_user, :class_name => "User",:foreign_key => "host_user_id"
+  has_many :approvals
 
   
 
@@ -54,18 +55,8 @@ class Meetup < ActiveRecord::Base
 
   # user can only join if meetup is open, or they are invited
   def can_join?(user)
-    if self.users.include?(user)
-      return false
-    end
-
-    if self.invitation_type_id == Meetup::OPEN
-      return true
-    end
-
-    self.invitations.where(:email => user.email).each do |invite|
-      return true
-    end
-    return false
+    return false if self.users.include?(user)
+    return true
   end
 
   def can_invite_others?(user)
@@ -74,5 +65,11 @@ class Meetup < ActiveRecord::Base
     return true if self.invitation_type_id == Meetup::CLOSED && self.host_user == user
     return false
   end
-  
+
+  def need_approval?(user)
+    self.invitations.where(:email => user.email).each do |invite|
+      return false
+    end
+    return true
+  end
 end

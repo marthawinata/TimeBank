@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Hey <%= @approval.meetup.name %> organizers!</h1>
+    <p>
+      You have been asked to approve <%= @approval.user.email %>  joining <%= @approval.meetup.name %>
+      </p><p>
+      Click on the link below to approve: <br/>
+      <a href=<%= "http://localhost:3000/approvals/#{@approval.id}/receive_response?url=#{@approval.url_to_approve}" %>>
+      <%= "http://localhost:3000/approvals/#{@approval.id}/receive_response?url=#{@approval.url_to_approve}" %></a>
+    </p><p>
+      Click on the link below to reject <br/>
+      <a href=<%= "http://localhost:3000/approvals/#{@approval.id}/receive_response?url=#{@approval.url_to_reject}" %>>
+      <%= "http://localhost:3000/approvals/#{@approval.id}/receive_response?url=#{@approval.url_to_reject}" %></a>
+    </p>
+  </body>
+</html>

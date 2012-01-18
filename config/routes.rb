@@ -1,5 +1,11 @@
 TimeBank::Application.routes.draw do
 
+  resources :approvals do
+    member do
+      get 'receive_response'
+    end
+  end
+
   get 'invitations/receive_response' => 'invitations#receive_response'
   resources :invitations
 
