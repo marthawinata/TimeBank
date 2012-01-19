@@ -38,12 +38,14 @@ class BoardGameGeek
   def parse_boardgame(element)
     bgg_id = element['id']
     name = element.css('name')
+    img_url = element.css('thumbnail')
     inbound_links = element.css("link[inbound=true]")
     is_standalone = inbound_links.empty?
     parent_boardgame_id = is_standalone ? nil : inbound_links.first['id']
 
     if (!name.empty?)
       return Boardgame.new(:name => name.first['value'],
+        :img_url => img_url.first.text(),
         :bgg_id=> bgg_id,
         :is_standalone=> is_standalone,
         :parent_boardgame_id => parent_boardgame_id)

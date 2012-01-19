@@ -12,7 +12,7 @@
 
   <table>
   <% @matching_boardgames.each do |matching_boardgame|  %>
-    <tr data-boardgame-id="<%= matching_boardgame.id %>" class="search-boardgame-row">
+    <tr data-boardgame-id="<%= matching_boardgame.id %>" class="search-boardgame-row" data-boardgame-img="<%= matching_boardgame.img_url %>">
       <td class="search-boardgame-name"><%= matching_boardgame.name %></td>
       <td><a href="#" class="search-boardgame-add">Add</a></td>
     </tr>
